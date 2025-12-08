@@ -17,7 +17,7 @@ In DevSecOps, Git is the foundation for:
 ### Install Git
 #### Linux
 ```bash
-sudo apt install git     # Ubuntu/Debian \
+sudo apt install git     # Ubuntu/Debian
 sudo yum install git     # RHEL/CentOS/Rocky
 ```
 #### Mac
@@ -31,7 +31,7 @@ git --version
 ```
 #### Configure user identity
 ```bash
-git config --global user.name "Your Name" \
+git config --global user.name "Your Name" 
 git config --global user.email "you@example.com"
 ```
 ----
@@ -39,12 +39,25 @@ git config --global user.email "you@example.com"
 ### Initialize a Git Repository
 Create a new repository for your project:
 ```bash
-mkdir your_git_project \
-cd your_git_project \
+mkdir your_git_project 
+cd your_git_project 
 git init
 ```
 ### Clone an existing repository
 ```bash
 git clone https://github.com/username/project.git
 ```
+----
+### ✍️ 4. The Git Workflow
+![Alt text](./images/gitflow.png)
 
+- **Branches:**
+- master → Production-ready code. Each commit here represents a released version (tagged).
+
+- develop → Integration branch containing code for the next release.
+
+- Feature branches (feature/*) → Used to develop new features. Created from develop and merged back into develop.
+
+- Release branches (release/*) → Created from develop to prepare a new version (testing, polishing). Merged into both master and develop.
+
+- Hotfix branches (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
