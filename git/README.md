@@ -70,9 +70,11 @@ Uploads your local commits to the remote repository.
 ```bash
 git push
 ```
-
-###
-
+### View Commit History
+Check the commit history
+```bash
+git log
+```
 ----
 ### ✍️ 4. The Git Workflow
 ![Alt text](./images/gitflow.png)
@@ -83,6 +85,26 @@ git push
     - `Feature branches` (feature/*) → Used to develop new features. Created from develop and merged back into develop.
     - `Release branches` (release/*) → Created from develop to prepare a new version (testing, polishing). Merged into both master and develop.
     - `Hotfix branches` (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
+
+- Create and Switch Branches
+Create a new branch named feature-a:
+```bash
+git branch feature-a
+```
+Switch to the feature-a branch.
+```bash
+git checkout feature-a
+```
+Use multiple command to create and switch to the new branch
+```bash
+git checkout -b feature-a
+```
+Create a new file in feature-a
+```bash
+echo "Here is new file in feature-a" > new_file_FA.txt
+git add new_file_FA.txt
+git commit -m "Added new file"
+```
 
 ----
 ### 📤 5. Pushing and Pulling Code
