@@ -57,3 +57,38 @@ git clone https://github.com/username/project.git
     - `Feature branches` (feature/*) → Used to develop new features. Created from develop and merged back into develop.
     - `Release branches` (release/*) → Created from develop to prepare a new version (testing, polishing). Merged into both master and develop.
     - `Hotfix branches` (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
+
+----
+### 📤 5. Pushing and Pulling Code
+Push your changes to remote:
+```bash
+git push origin feature/add-logging
+```
+Pull updates from remote:
+```bash
+git pull
+```
+⚠️ Always pull before starting work to reduce merge conflicts.
+
+----
+### 🔀 7. Merge, Pull Requests & Secure Code Reviews
+In DevSecOps, merging is not just about combining code—it’s about ensuring security, quality, and compliance.
+A secure Git process usually includes:
+`Working Directory → Staging Area → Commit → Push → PR/MR → Review → Merge → Pipeline`
+    - Push your branch
+    - Create Pull Request (PR) or Merge Request (MR)
+    - Request reviewers
+    - Run automated security checks (SAST, SCA, IaC scanning)
+    - Merge into main
+
+----
+### ⚠️ 8. Handling Merge Conflicts
+Conflicts happen when two people change the same code.
+Git will mark conflict sections like this:
+```bash
+<<<<<<< HEAD
+current code
+=======
+incoming code
+>>>>>>> feature/add-logging`
+```
