@@ -86,7 +86,7 @@ git log
     - `Release branches` (release/*) → Created from develop to prepare a new version (testing, polishing). Merged into both master and develop.
     - `Hotfix branches` (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
 
-- Create and Switch Branches
+- Create and Switch Branches\
 Create a new branch named feature-a:
 ```bash
 git branch feature-a
