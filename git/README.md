@@ -79,7 +79,7 @@ git log
 ### ✍️ 4. The Git Workflow
 ![Alt text](./images/gitflow.png)
 
-- **Branches:**
+#### **Branches:**
     - `master` → Production-ready code. Each commit here represents a released version (tagged).
     - `develop` → Integration branch containing code for the next release.
     - `Feature branches` (feature/*) → Used to develop new features. Created from develop and merged back into develop.
