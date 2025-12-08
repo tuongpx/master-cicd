@@ -17,7 +17,7 @@ In DevSecOps, Git is the foundation for:
 ### Install Git
 #### Linux
 sudo apt install git     # Ubuntu/Debian \
-sudo yum install git     # RHEL/CentOS/Rocky\
+sudo yum install git     # RHEL/CentOS/Rocky
 #### Mac
 brew install git
 #### Windows
@@ -29,8 +29,13 @@ git config --global user.email "you@example.com"
 
 ----
 ## 📦 3. Creating or Cloning a Repository
-### Create a new repository
+### Initialize a Git Repository
+Create a new repository for your project:
+<pre> \`\`\`
+mkdir your_git_project \
+cd your_git_project \
 git init
+\`\`\` </pre>
 ### Clone an existing repository
 git clone https://github.com/username/project.git
 
