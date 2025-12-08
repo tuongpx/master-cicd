@@ -25,6 +25,7 @@ sudo yum install git     # RHEL/CentOS/Rocky
 brew install git
 ```
 #### Windows
+
 #### Check version
 ```bash
 git --version
@@ -47,6 +48,31 @@ git init
 ```bash
 git clone https://github.com/username/project.git
 ```
+### Create and Commit Your First File
+Creat a simple file:
+```bash
+echo "# Here is the first file" > "File_name"
+```
+
+Check the status of your repository.
+```bash
+git status
+```
+This will show your file as untracked. Stage the file for commit
+```bash
+git add .
+```
+Commit the stage file with comment
+```bash
+git commit -m "Your comment here"
+```
+Uploads your local commits to the remote repository.
+```bash
+git push
+```
+
+###
+
 ----
 ### ✍️ 4. The Git Workflow
 ![Alt text](./images/gitflow.png)
