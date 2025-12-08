@@ -38,7 +38,7 @@ git config --global user.email "you@example.com"
 ----
 ## 📦 3. Creating or Cloning a Repository
 ### Initialize a Git Repository
-Create a new repository for your project:
+Create a new repository for your project.
 ```bash
 mkdir your_git_project 
 cd your_git_project 
@@ -49,7 +49,7 @@ git init
 git clone https://github.com/username/project.git
 ```
 ### Create and Commit Your First File
-Creat a simple file:
+Creat a simple file.
 ```bash
 echo "# Here is the first file" > "File_name"
 ```
@@ -58,11 +58,11 @@ Check the status of your repository.
 ```bash
 git status
 ```
-This will show your file as untracked. Stage the file for commit
+This will show your file as untracked. Stage the file for commit.
 ```bash
 git add .
 ```
-Commit the stage file with comment
+Commit the stage file with comment.
 ```bash
 git commit -m "Your comment here"
 ```
@@ -71,7 +71,7 @@ Uploads your local commits to the remote repository.
 git push
 ```
 ### View Commit History
-Check the commit history
+Check the commit history.
 ```bash
 git log
 ```
@@ -87,7 +87,7 @@ git log
     - `Hotfix branches` (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
 
 #### Create and Switch Branches
-Create a new branch named feature-a:
+Create a new branch named feature-a.
 ```bash
 git branch feature-a
 ```
@@ -95,24 +95,33 @@ Switch to the feature-a branch.
 ```bash
 git checkout feature-a
 ```
-Use combine command to create and switch to the new branch
+Use combine command to create and switch to the new branch.
 ```bash
 git checkout -b feature-a
 ```
-Create a new file in feature-a
+Create a new file in feature-a.
 ```bash
 echo "Here is new file in feature-a" > new_file_FA.txt
 git add new_file_FA.txt
 git commit -m "Added new file"
 ```
-
+#### Merge Branches
+Switch back to the master branch.
+```bash
+git checkout master
+```
+Merge feature-a to master.
+```bash
+git merge feature-a
+```
+Verify the merge by checking the content new_file_FA.txt in the master branch.
 ----
 ### 📤 5. Pushing and Pulling Code
-Push your changes to remote:
+Push your changes to remote.
 ```bash
 git push origin feature/add-logging
 ```
-Pull updates from remote:
+Pull updates from remote.
 ```bash
 git pull
 ```
