@@ -16,15 +16,15 @@ In DevSecOps, Git is the foundation for:
 ## 🏗️ 2. Setting Up Git
 ### Install Git
 #### Linux
-sudo apt install git     # Ubuntu/Debian
-sudo yum install git     # RHEL/CentOS/Rocky
+sudo apt install git     # Ubuntu/Debian \
+sudo yum install git     # RHEL/CentOS/Rocky\
 #### Mac
 brew install git
 #### Windows
 #### Check version
 git --version
 #### Configure user identity
-git config --global user.name "Your Name"
+git config --global user.name "Your Name" \
 git config --global user.email "you@example.com"
 
 ----
