@@ -52,12 +52,8 @@ git clone https://github.com/username/project.git
 ![Alt text](./images/gitflow.png)
 
 - **Branches:**
-- master → Production-ready code. Each commit here represents a released version (tagged).
-
-- develop → Integration branch containing code for the next release.
-
-- Feature branches (feature/*) → Used to develop new features. Created from develop and merged back into develop.
-
-- Release branches (release/*) → Created from develop to prepare a new version (testing, polishing). Merged into both master and develop.
-
-- Hotfix branches (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
+    - `master` → Production-ready code. Each commit here represents a released version (tagged).
+    - `develop` → Integration branch containing code for the next release.
+    - `Feature branches` (feature/*) → Used to develop new features. Created from develop and merged back into develop.
+    - `Release branches` (release/*) → Created from develop to prepare a new version (testing, polishing). Merged into both master and develop.
+    - `Hotfix branches` (hotfix/*) → For urgent production fixes. Created from master, then merged back into both master and develop.
