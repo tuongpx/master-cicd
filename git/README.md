@@ -229,7 +229,12 @@ Line 2: Change from Branch B
 🎉 You just created a Git conflict!
 
 #### 🔹 6. Resolve the conflict
-Edit demo.txt to the final version you want.
+Edit demo.txt to the final version you want. For example:
+```bash
+Line 1: Hello Git
+Line 2: Final Merged Version
+```
+Then:
 ```bash
 git add demo.txt
 git commit -m "Resolve conflict between Branch A and Branch B"
