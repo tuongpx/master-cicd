@@ -95,7 +95,7 @@ Switch to the feature-a branch.
 ```bash
 git checkout feature-a
 ```
-Use multiple command to create and switch to the new branch
+Use combine command to create and switch to the new branch
 ```bash
 git checkout -b feature-a
 ```
