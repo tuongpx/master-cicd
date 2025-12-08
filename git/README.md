@@ -16,27 +16,35 @@ In DevSecOps, Git is the foundation for:
 ## 🏗️ 2. Setting Up Git
 ### Install Git
 #### Linux
+```bash
 sudo apt install git     # Ubuntu/Debian \
 sudo yum install git     # RHEL/CentOS/Rocky
+```
 #### Mac
+```bash
 brew install git
+```
 #### Windows
 #### Check version
+```bash
 git --version
+```
 #### Configure user identity
+```bash
 git config --global user.name "Your Name" \
 git config --global user.email "you@example.com"
-
+```
 ----
 ## 📦 3. Creating or Cloning a Repository
 ### Initialize a Git Repository
 Create a new repository for your project:
-<pre> \`\`\`
+```bash
 mkdir your_git_project \
 cd your_git_project \
 git init
-\`\`\` </pre>
+```
 ### Clone an existing repository
+```bash
 git clone https://github.com/username/project.git
-
+```
 
