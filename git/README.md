@@ -72,19 +72,21 @@ git pull
 
 ----
 ### 🔀 7. Merge, Pull Requests & Secure Code Reviews
-In DevSecOps, merging is not just about combining code—it’s about ensuring security, quality, and compliance.
-A secure Git process usually includes:
-`Working Directory → Staging Area → Commit → Push → PR/MR → Review → Merge → Pipeline`
-    - Push your branch
-    - Create Pull Request (PR) or Merge Request (MR)
-    - Request reviewers
-    - Run automated security checks (SAST, SCA, IaC scanning)
+In DevSecOps, merging is not just about combining code—it’s about ensuring security, quality, and compliance.\
+A secure Git process usually includes:\
+```bash
+Working Directory → Staging Area → Commit → Push → PR/MR → Review → Merge → Pipeline
+```
+    - Push your branch\
+    - Create Pull Request (PR) or Merge Request (MR)\
+    - Request reviewers\
+    - Run automated security checks (SAST, SCA, IaC scanning)\
     - Merge into main
 
 ----
 ### ⚠️ 8. Handling Merge Conflicts
 Conflicts happen when two people change the same code.
-Git will mark conflict sections like this:
+Git will mark conflict sections like this:\
 ```bash
 <<<<<<< HEAD
 current code
