@@ -164,3 +164,74 @@ Choose one of these:
     - Merge both manually
     - Rewrite the block entirely
 Remove Git's conflict markers (<<<<<<<, =======, >>>>>>>).
+##### Stage the resolved files
+```bash
+git add <file>
+```
+#### Commit the resolution
+```bash
+git commit
+```
+----
+### 🧪 9. Hands-on Lab: Create and Resolve a Git Conflict
+Follow this lab to practice generating and fixing merge conflicts.
+#### 🔹 1. Initialize a test repository
+```bash
+mkdir git-conflict-lab
+cd git-conflict-lab
+git init
+```
+#### 🔹 2. Create a file and make your first commit
+```bash
+echo "Line 1: Hello Git" > demo.txt
+echo "Line 2: Original Content" >> demo.txt
+git add demo.txt
+git commit -m "Initial commit with demo.txt"
+```
+File content now:
+```bash
+Line 1: Hello Git
+Line 2: Original Content
+```
+#### 🔹 3. Create Branch A and modify the file
+```bash
+git checkout -b branch-A
+echo "Line 2: Change from Branch A" > demo.txt
+git add demo.txt
+git commit -m "Branch A modifies line 2"
+```
+#### 🔹 4. Create Branch B and modify the same line differently
+```bash
+git checkout master
+git checkout -b branch-B
+echo "Line 2: Change from Branch B" > demo.txt
+git add demo.txt
+git commit -m "Branch B modifies line 2"
+```
+#### 🔹 5. Merge Branch B into Branch A to create a conflict
+```bash
+git checkout branch-A
+git merge branch-B
+```
+Expected output:
+```bash
+CONFLICT (content): Merge conflict in demo.txt
+```
+The file now looks like:
+```bash
+Line 1: Hello Git
+<<<<<<< HEAD
+Line 2: Change from Branch A
+=======
+Line 2: Change from Branch B
+>>>>>>> branch-B
+```
+🎉 You just created a Git conflict!
+
+#### 🔹 6. Resolve the conflict
+Edit demo.txt to the final version you want.
+```bash
+git add demo.txt
+git commit -m "Resolve conflict between Branch A and Branch B"
+```
+Conflict resolved!
