@@ -151,3 +151,16 @@ current code
 incoming code
 >>>>>>> feature/add-logging`
 ```
+#### How to Resolve a Merge Conflict
+##### Open the file with conflicts
+Git marks all files that require attention when run bellow command:
+```bash
+git status
+```
+##### Manually fix the conflict
+Choose one of these:
+    - Keep your version
+    - Keep their version
+    - Merge both manually
+    - Rewrite the block entirely
+Remove Git's conflict markers (<<<<<<<, =======, >>>>>>>).
