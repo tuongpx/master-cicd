@@ -447,6 +447,7 @@ job_build:
     - echo "The job is running on a GitLab Runner."
 ```
 Commit & push → The pipeline should run on your local runner.
+![Alt text](./images/pipeline-test.png)
 
 #### 🗂️ 8. Useful Commands (GitLab CE + Runner)
 
