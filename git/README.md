@@ -366,7 +366,30 @@ Inside the group:
 Click Invite
 ![Alt text](./images/group-memver-invite.png)
 ##### 8.3. Creating a Project in GitLab
+A project is where you store your source code, CI/CD pipelines, and repository settings.
+###### Step 1 — Create a project inside the group
+Navigate to the group you created:
+    - Click New Project
 
+    - Select:
 
+        - Create blank project
+
+        - or Import from GitHub/GitLab
+
+        - or Use a template
+![Alt text](./images/create-project.png)
+###### Step 2 — Fill project details
+Enter:
+    - Project name
+
+    - Project description
+
+    - Visibility (Private/Internal/Public)
+
+    - Initialize repository with README (recommended)
+
+Then click Create Project.
+![Alt text](./images/create-blank-project.png)
 
 
