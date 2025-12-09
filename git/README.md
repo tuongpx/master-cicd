@@ -246,7 +246,7 @@ git commit -m "Resolve conflict between Branch A and Branch B"
 Conflict resolved!
 
 ----
-## 🛠️ Hands-on lab: Installing GitLab CE and Gitlab Runner.
+## 🛠️ 10.Hands-on lab: Installing GitLab CE and Gitlab Runner.
 This guide explains how to install GitLab CE and GitLab Runner on a single Rocky Linux 9 server.
 It is optimized for a LAB environment with the following specs:
     - 4 vCPU
@@ -284,13 +284,13 @@ Replace the URL below with your lab hostname or IP. In this lab, I use domain ` 
 ```bash
 sudo EXTERNAL_URL="http://gitlab.defenselab.info" dnf install -y gitlab-ce
 ```
-#### 🧩 7. Open Required Ports
+#### 🧩 5. Open Required Ports
 ```bash
 sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
 sudo firewall-cmd --reload
 ```
-#### 🧩 8. Access GitLab Web Interface
+#### 🧩 6. Access GitLab Web Interface
 Visit:
 ```bash
 http://gitlab.defenselab.info
@@ -307,7 +307,7 @@ When logging into GitLab for the first time, the system will prompt you to set a
 After updating the password, you can access the Admin Area to manage gitlab.
 ![Alt text](./images/admin-area.png)
 
-##### 8.1. Manage User
+##### 6.1. Manage User
 ###### Step 1 — Create a new user
 In the left sidebar, navigate to:
 `Admin Area → Overview → Users`
@@ -329,7 +329,7 @@ Adjust user permissions:
         Regular
         Administrator
         ```
-##### 8.2. Manage Group
+##### 6.2. Manage Group
 Groups help organize projects and manage permissions for multiple users—especially useful in DevOps teams.
 ###### Step1 - Navigate to Groups
     - Open the GitLab menu.
@@ -365,7 +365,7 @@ Inside the group:
 
 Click Invite
 ![Alt text](./images/group-memver-invite.png)
-##### 8.3. Creating a Project in GitLab
+##### 6.3. Creating a Project in GitLab
 A project is where you store your source code, CI/CD pipelines, and repository settings.
 ###### Step 1 — Create a project inside the group
 Navigate to the group you created:
@@ -400,3 +400,38 @@ git commit -m "Initial commit"
 git push -u origin main
 ```
 ![Alt text](./images/git-push.png)
+
+#### 🚀 7. Install GitLab Runner
+Add the repository:
+```bash
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+```
+Install Runner:
+```bash
+sudo dnf install -y gitlab-runner
+```
+Start Runner:
+```bash
+sudo systemctl enable --now gitlab-runner
+```
+Register GitLab Runner
+In GitLab UI:
+```bash
+Admin → CI/CD → Runners → New Runner
+```
+![Alt text](./images/create-runner.png)
+Then click `Create instance runner`
+
+In register tab, enter the information for runner:
+![Alt text](./images/runner-info.png)
+Then click `Create runner`
+
+To register runner, select `Operation System` → Copy `runner authentication token` → Paste to Gitlab server
+![Alt text](./images/register-runner.png)
+
+Verify runner:
+```bash
+gitlab-runner run
+```
+
+
