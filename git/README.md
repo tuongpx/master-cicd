@@ -331,7 +331,7 @@ Adjust user permissions:
         ```
 ##### 8.2. Manage Group
 Groups help organize projects and manage permissions for multiple users—especially useful in DevOps teams.
-###### Navigate to Groups
+###### Step1 - Navigate to Groups
     - Open the GitLab menu.
     - Select Groups.
     - Click New Group.
@@ -341,6 +341,29 @@ Groups help organize projects and manage permissions for multiple users—especi
         Visibility level (Private / Internal / Public)
 Then click `Create Group`.
 ![Alt text](./images/new-group.png)
+
+###### Step 2 — Add members to the group
+Inside the group:
+
+    - Go to Group → Manage → Members
+
+    - Search for the user you created earlier
+
+    - Assign a role:
+
+        - Guest
+
+        - Reporter
+
+        - Developer
+
+        - Maintainer
+
+        - Owner
+
+Click Invite or Add to group
+![Alt text](./images/group-member.png)
+##### 8.3. Creating a Project in GitLab
 
 
 
