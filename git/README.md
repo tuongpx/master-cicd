@@ -391,5 +391,12 @@ Enter:
 
 Then click Create Project.
 ![Alt text](./images/create-blank-project.png)
-
+###### Step 3 — Push code into the new project
+GitLab will display instructions like:
+```bash
+git remote add origin http://gitlab.defenselab.info/mobile-app/digi-app.git
+git add .
+git commit -m "Initial commit"
+git push -u origin mainmain
+```
 
