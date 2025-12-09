@@ -23,30 +23,30 @@
 These practices automate the entire flow from writing code → building → testing → deploying, making development faster, safer, and more reliable.
 ----
 ## 🔧 3. Continuous Integration (CI)
-With CI, developers frequently push their changes to a shared Git repository.
+- With CI, developers frequently push their changes to a shared Git repository.
 Every push triggers an automated process:
 
-- Build the application
+    - Build the application
 
-- Run unit tests and integration tests
+    - Run unit tests and integration tests
 
-- Detect errors early
+    - Detect errors early
 ### 🎯 Goal
-CI ensures the codebase is always healthy, reducing big merge problems and making integration smooth.
-Think of it like cleaning a house a little every day instead of waiting for a massive month-end cleanup.
+- CI ensures the codebase is always healthy, reducing big merge problems and making integration smooth.
+- Think of it like cleaning a house a little every day instead of waiting for a massive month-end cleanup.
 ----
 ## 📦 4. Continuous Delivery (CD)
-Continuous Delivery ensures that every build after CI is ready for production.
+- Continuous Delivery ensures that every build after CI is ready for production.
 
-A typical CD pipeline automates:
+- A typical CD pipeline automates:
 
-- Build
+    - Build
 
-- Test
+    - Test
 
-- Deploy to Staging
+    - Deploy to Staging
 
-- Execute E2E, performance, and security checks
+    - Execute E2E, performance, and security checks
 
 👉 The only manual step left is clicking “Deploy to Production”.
 ### 🎯 Goal: “Always Ready”
@@ -58,13 +58,13 @@ A typical CD pipeline automates:
 - Allow business teams to choose the best release timing.
 ----
 ## ⚙️ 5. Continuous Deployment (CD)
-Continuous Deployment takes automation one step further:
+- Continuous Deployment takes automation one step further:
 
-- After all automated tests pass
+    - After all automated tests pass
 
-- Code is auto-deployed to Production
+    - Code is auto-deployed to Production
 
-- No human approval required
+    - No human approval required
 
 ### 🎯 Benefits
 
