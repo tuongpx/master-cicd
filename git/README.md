@@ -303,6 +303,13 @@ sudo cat /etc/gitlab/initial_root_password
 ![Alt text](./images/gitlab-login.png)
 
 When logging into GitLab for the first time, the system will prompt you to set a new password for the default administrator account (root).\
-After updating the password, you can access the Admin Area by clicking the wrench icon, which opens the GitLab administration interface.
 ![Alt text](./images/gitlab-admin.png)
+After updating the password, you can access the Admin Area to manage gitlab.
+![Alt text](./images/admin-area.png)
 
+##### Manage User
+Create User
+At `Admin Area` choose `Overview` -> User
+![Alt text](./images/new-user.png)
+Input User information
+![Alt text](./images/new-user-info.png)
