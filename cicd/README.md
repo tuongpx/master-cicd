@@ -21,7 +21,7 @@
 
     - CD — Continuous Delivery / Continuous Deployment
 These practices automate the entire flow from writing code → building → testing → deploying, making development faster, safer, and more reliable.
-![Alt text](./images/CICD-Pipeline.png)
+![Alt text](./images/CICD-pipeline.png)
 ----
 ## 🔧 3. Continuous Integration (CI)
 - With CI, developers frequently push their changes to a shared Git repository.
