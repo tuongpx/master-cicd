@@ -114,7 +114,7 @@ Every push triggers an automated process:
 | Unit Tests           | ✔ Auto | ✔ Auto              | ✔ Auto                |
 | Deploy to Staging    | ✖      | ✔ Auto              | ✔ Auto                |
 | Acceptance Tests     | ✖      | ✔ Auto              | ✔ Auto                |
-| Deploy to Production | ✖      | ✔ Manual            | ✔ Automatic           |
+| Deploy to Production | ✖      | ✔ Manual            | ✔ Auto         |
 ----
 ## 🔥 8. What is GitOps?
 - GitOps is a way of managing infrastructure and applications using Git as the single source of truth.
