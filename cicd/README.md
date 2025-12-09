@@ -58,3 +58,28 @@ A typical CD pipeline automates:
 - Make releases predictable and repeatable
 
 - Allow business teams to choose the best release timing.
+----
+## ⚙️ 5. Continuous Deployment (CD)
+Continuous Deployment takes automation one step further:
+
+- After all automated tests pass
+
+- Code is auto-deployed to Production
+
+- No human approval required
+
+### 🎯 Benefits
+
+- Small, frequent, safe releases
+
+- Faster feedback from real users
+
+- Developers focus on coding, not deployment anxiety
+
+### 🧱 Requirements
+
+- Strong automated testing
+
+- Reliable pipelines
+
+- Robust monitoring & alerting
