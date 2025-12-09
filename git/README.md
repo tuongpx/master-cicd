@@ -364,7 +364,7 @@ Inside the group:
         - Owner
 
 Click Invite
-![Alt text](./images/group-member-invite.png)
+![Alt text](./images/group-memver-invite.png)
 ##### 8.3. Creating a Project in GitLab
 
 
