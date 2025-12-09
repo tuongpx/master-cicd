@@ -335,12 +335,10 @@ Groups help organize projects and manage permissions for multiple users—especi
     - Open the GitLab menu.
     - Select Groups.
     - Click New Group.
-    - Enter:\
-        ```bash
+    - Enter:
         Group name
         Group URL
         Visibility level (Private / Internal / Public)
-        ```
 Then click `Create Group`.
 ![Alt text](./images/new-group.png)
 
