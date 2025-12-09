@@ -445,7 +445,7 @@ job_build:
   script:
     - echo "Hello, this is a CI/CD job!"
     - echo "The job is running on a GitLab Runner."
-`
+```
 Commit & push → The pipeline should run on your local runner.
 
 #### 🗂️ 8. Useful Commands (GitLab CE + Runner)
