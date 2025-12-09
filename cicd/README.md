@@ -11,7 +11,6 @@ Before CI/CD, software teams often faced big challenges:
 - Manual build, test, and deployment — slow and error-prone
 
 - The classic excuse: “It works on my machine!”
-
 CI/CD was created to solve these problems through automation.
 ----
 ## 🎯 2. What is CI/CD?
@@ -20,7 +19,6 @@ CI/CD includes:
 - CI — Continuous Integration
 
 - CD — Continuous Delivery / Continuous Deployment
-
 These practices automate the entire flow from writing code → building → testing → deploying, making development faster, safer, and more reliable.
 ----
 ## 🔧 3. Continuous Integration (CI)
