@@ -240,3 +240,19 @@ git add demo.txt
 git commit -m "Resolve conflict between Branch A and Branch B"
 ```
 Conflict resolved!
+
+----
+## 🛠️ Installing GitLab CE and Gitlab Runner.
+This guide explains how to install GitLab CE and GitLab Runner on a single Rocky Linux 9 server.
+It is optimized for a LAB environment with the following specs:
+    - 4 vCPU
+    - 4GB RAM
+    - 30GB storage
+### 🎯 Lab Objectives
+By completing this lab, you will be able to:
+
+    - Understand the roles of GitLab and GitLab Runner in a modern DevOps workflow.
+    - Install GitLab Community Edition (CE) on a local or lab server.
+    - Configure and register GitLab Runner to execute CI/CD pipelines.
+
+This lab provides foundational hands-on experience with source code management and CI/CD automation.
