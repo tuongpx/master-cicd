@@ -345,7 +345,9 @@ Then click `Create Group`.
 ###### Step 2 — Add members to the group
 Inside the group:
 
-    - Go to Group → Manage → Members
+    - Go to Group → Manage → Members → Invite members
+
+![Alt text](./images/group-member.png)
 
     - Search for the user you created earlier
 
@@ -361,8 +363,8 @@ Inside the group:
 
         - Owner
 
-Click Invite or Add to group
-![Alt text](./images/group-member.png)
+Click Invite
+![Alt text](./images/group-member-invite.png)
 ##### 8.3. Creating a Project in GitLab
 
 
