@@ -1,3 +1,4 @@
+----
 # 🔐 A Quick Git Guide
 Git is one of the essential tools in any DevSecOps workflow. Whether you’re building CI/CD pipelines, managing infrastructure as code (IaC), or reviewing secure changes, Git ensures that every line of code is tracked, auditable, and versioned properly. This quick guide will guide you through Git basics with a DevSecOps perspective—so you can work securely, efficiently, and collaboratively.
 
@@ -49,6 +50,9 @@ git init
 git clone https://github.com/username/project.git
 ```
 ### Create and Commit Your First File
+
+
+----
 Creat a simple file.
 ```bash
 echo "# Here is the first file" > "File_name"
@@ -242,11 +246,11 @@ git commit -m "Resolve conflict between Branch A and Branch B"
 Conflict resolved!
 
 ----
-## 🛠️ Installing GitLab CE and Gitlab Runner.
+## 🛠️ Hands-on lab: Installing GitLab CE and Gitlab Runner.
 This guide explains how to install GitLab CE and GitLab Runner on a single Rocky Linux 9 server.
 It is optimized for a LAB environment with the following specs:
     - 4 vCPU
-    - 4GB RAM
+    - 4GB RAi
     - 30GB storage
 ### 🎯 Lab Objectives
 By completing this lab, you will be able to:
@@ -256,3 +260,49 @@ By completing this lab, you will be able to:
     - Configure and register GitLab Runner to execute CI/CD pipelines.
 
 This lab provides foundational hands-on experience with source code management and CI/CD automation.
+### 📌 Why This Lab Uses GitLab CE + GitLab Runner on One Server
+In production environments, GitLab and GitLab Runner are typically installed on separate servers or Kubernetes nodes. However, for learning and testing, running both on a single small machine allows you to:
+
+    - Practice GitLab administration
+    - Learn Git workflow and repository management
+    - Build and test CI/CD pipelines
+    - Understand how GitLab Runner executes jobs
+
+This lab is designed specifically for small environments and limited hardware.
+#### 🧩 1. Update the System
+```bash
+sudo dnf update -y
+sudo dnf install -y curl policycoreutils openssh-server
+sudo systemctl enable sshd --now
+```
+#### 🧩 3. Add GitLab CE Repository
+```bash
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+```
+#### 🧩 4. Install GitLab CE
+Replace the URL below with your lab hostname or IP. In this lab, I use domain ` defenselab.info` as lab environment domain.
+```bash
+sudo EXTERNAL_URL="http://gitlab.defenselab.info" dnf install -y gitlab-ce
+```
+#### 🧩 7. Open Required Ports
+```bash
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+```
+#### 🧩 8. Access GitLab Web Interface
+Visit:
+```bash
+http://gitlab.defenselab.info
+```
+Retrieve the initial password:
+```bash
+sudo cat /etc/gitlab/initial_root_password
+```
+🎉 And now, see our result.
+![Alt text](./images/gitlab-login.png)
+
+When logging into GitLab for the first time, the system will prompt you to set a new password for the default administrator account (root).\
+After updating the password, you can access the Admin Area by clicking the wrench icon, which opens the GitLab administration interface.
+![Alt text](./images/gitlab-admin.png)
+
