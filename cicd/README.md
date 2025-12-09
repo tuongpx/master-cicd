@@ -106,3 +106,50 @@ Every push triggers an automated process:
 
 - Pros: safe release, instant rollback, A/B testing
 - Cons: can create technical debt
+----
+## 🔄 7. Summary — CI vs Delivery vs Deployment
+| Stage                | CI     | Continuous Delivery | Continuous Deployment |
+| -------------------- | ------ | ------------------- | --------------------- |
+| Build                | ✔ Auto | ✔ Auto              | ✔ Auto                |
+| Unit Tests           | ✔ Auto | ✔ Auto              | ✔ Auto                |
+| Deploy to Staging    | ✖      | ✔ Auto              | ✔ Auto                |
+| Acceptance Tests     | ✖      | ✔ Auto              | ✔ Auto                |
+| Deploy to Production | ✖      | ✔ Manual            | ✔ Automatic           |
+----
+## 🔥 8. What is GitOps?
+- GitOps is a way of managing infrastructure and applications using Git as the single source of truth.
+
+- Instead of deploying manually or using kubectl, you simply:
+
+    - Update the desired state (YAML) in Git
+
+    - Commit and push
+
+- An agent inside your cluster detects the change and automatically applies it.
+----
+## 🎣 9. Pull-Based Model — The Heart of GitOps
+### 🟥 Push-Based CI/CD (Traditional)
+
+- CI/CD system pushes changes to the cluster
+
+- CI/CD needs production credentials
+
+- Risk of config drift (real system ≠ Git state)
+### 🟩 Pull-Based GitOps (Modern)
+
+- An in-cluster agent (Argo CD, Flux) watches Git
+
+- When Git changes → agent pulls and applies changes
+
+- If someone manually modifies the cluster, the agent restores the Git state
+### ✨ Key Benefits
+
+- More secure (no CI/CD credentials in production)
+
+- Self-healing (auto-corrects config drift)
+
+- Easy rollback (just revert a Git commit)
+
+- Developer-friendly (just Git commits)
+
+👉 GitOps, with its pull-based philosophy, is a natural evolution of CI/CD. It does not replace CI; instead, it completes and strengthens the CD process. The CI/CD pipeline remains responsible for building, testing, and pushing new images to the image registry. GitOps takes care of everything afterward: automatically detecting new images and deploying them in a safe, secure, and reliable way.
