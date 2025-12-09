@@ -433,5 +433,27 @@ Verify runner:
 ```bash
 gitlab-runner run
 ```
+Testing CI/CD pipeline
 
+Create `.gitlab-ci.yml` :
 
+```bash
+stages:
+  - build
+job_build:
+  stage: build
+  script:
+    - echo "Hello, this is a CI/CD job!"
+    - echo "The job is running on a GitLab Runner."
+`
+Commit & push → The pipeline should run on your local runner.
+
+#### 🗂️ 8. Useful Commands (GitLab CE + Runner)
+
+| Component | Command                                | Description           |
+| --------- | -------------------------------------- | --------------------- |
+| GitLab    | `sudo gitlab-ctl status`               | Check GitLab services |
+| GitLab    | `sudo gitlab-ctl restart`              | Restart GitLab        |
+| GitLab    | `sudo gitlab-ctl tail`                 | Live logs             |
+| Runner    | `sudo systemctl restart gitlab-runner` | Restart Runner        |
+| Runner    | `gitlab-runner verify`                 | Verify connection     |
