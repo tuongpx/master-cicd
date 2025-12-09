@@ -307,30 +307,30 @@ When logging into GitLab for the first time, the system will prompt you to set a
 After updating the password, you can access the Admin Area to manage gitlab.
 ![Alt text](./images/admin-area.png)
 
-##### Manage User
+##### 8.1. Manage User
 ###### Step 1 — Create a new user
 In the left sidebar, navigate to:
 `Admin Area → Overview → Users`
 Click `New User`.
 ![Alt text](./images/new-user.png)
-Fill in:\
-        - Name\
-        - Username\
-        - Email\
+Fill in:
+        - Name
+        - Username
+        - Email
         - Password
 Click Create user.
 ![Alt text](./images/new-user-info.png)
 Gitlab server will sent an email to change password for first time login.\
 ###### Step 2 — Adjust user permissions
-Adjust user permissions\
-        - Regular\
+Adjust user permissions:
+        - Regular
         - Administrator
-##### Manage Group
+##### 8.2. Manage Group
 Groups help organize projects and manage permissions for multiple users—especially useful in DevOps teams.
 ###### Step 1 — Navigate to Groups
     - Open the GitLab menu.
-    - Select `Groups`.
-    - Click `New Group`.
+    - Select Groups.
+    - Click New Group.
 ![Alt text](./images/new-group.png)
 ###### Step 2 — Fill in group information
 Enter:
