@@ -315,10 +315,10 @@ Click `New User`.
 ![Alt text](./images/new-user.png)
 Fill in:
         ```bash
-        - Name
-        - Username
-        - Email
-        - Password
+        Name
+        Username
+        Email
+        Password
         ```
 Click Create user.
 ![Alt text](./images/new-user-info.png)
@@ -326,8 +326,8 @@ Gitlab server will sent an email to change password for first time login.\
 ###### Step 2 — Adjust user permissions
 Adjust user permissions:
         ```bash
-        - Regular
-        - Administrator
+        Regular
+        Administrator
         ```
 ##### 8.2. Manage Group
 Groups help organize projects and manage permissions for multiple users—especially useful in DevOps teams.
@@ -340,9 +340,9 @@ Groups help organize projects and manage permissions for multiple users—especi
 
 Enter:
     ```bash
-    - Group name
-    - Group URL
-    - Visibility level (Private / Internal / Public)
+    Group name
+    Group URL
+    Visibility level (Private / Internal / Public)
     ```
 
 Then click `Create Group`.
