@@ -344,5 +344,4 @@ Enter:
     Group URL
     Visibility level (Private / Internal / Public)
     ```
-
 Then click `Create Group`.
