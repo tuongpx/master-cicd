@@ -397,6 +397,6 @@ GitLab will display instructions like:
 git remote add origin http://gitlab.defenselab.info/mobile-app/digi-app.git
 git add .
 git commit -m "Initial commit"
-git push -u origin mainmain
+git push -u origin main
 ```
-
+![Alt text](./images/git-push.png)
