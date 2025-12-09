@@ -1,24 +1,25 @@
 # 🚀 CI/CD & GitOps
-This document explains CI/CD and GitOps in a clear and simple way, suitable for readers who have no prior knowledge of DevOps.
+- This document explains CI/CD and GitOps in a clear and simple way, suitable for readers who have no prior knowledge of DevOps.
 ----
 ## 🧩 1. Why CI/CD Exists — The Problem in Traditional Development
-Before CI/CD, software teams often faced big challenges:
+- Before CI/CD, software teams often faced big challenges:
 
-- Merge conflicts when combining code from different developers
+    - Merge conflicts when combining code from different developers
 
-- Integration failures — code works on one machine but fails when merged
+    - Integration failures — code works on one machine but fails when merged
 
-- Manual build, test, and deployment — slow and error-prone
+    - Manual build, test, and deployment — slow and error-prone
 
-- The classic excuse: “It works on my machine!”
-CI/CD was created to solve these problems through automation.
+    - The classic excuse: “It works on my machine!”
+- CI/CD was created to solve these problems through automation.
 ----
 ## 🎯 2. What is CI/CD?
-CI/CD includes:
+- CI/CD stands for two main concepts: Continuous Integration and Continuous Delivery/Deployment. This is a method of automating the software development process, helping to get products from programmers to end users faster, safer and more reliably.
+- CI/CD includes:
 
-- CI — Continuous Integration
+    - CI — Continuous Integration
 
-- CD — Continuous Delivery / Continuous Deployment
+    - CD — Continuous Delivery / Continuous Deployment
 These practices automate the entire flow from writing code → building → testing → deploying, making development faster, safer, and more reliable.
 ----
 ## 🔧 3. Continuous Integration (CI)
@@ -32,7 +33,6 @@ Every push triggers an automated process:
 - Detect errors early
 ### 🎯 Goal
 CI ensures the codebase is always healthy, reducing big merge problems and making integration smooth.
-
 Think of it like cleaning a house a little every day instead of waiting for a massive month-end cleanup.
 ----
 ## 📦 4. Continuous Delivery (CD)
