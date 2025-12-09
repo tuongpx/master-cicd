@@ -338,7 +338,7 @@ Groups help organize projects and manage permissions for multiple users—especi
 ![Alt text](./images/new-group.png)
 ###### Step 2 — Fill in group information
 
-Enter:
+Enter:\
     ```bash
     Group name
     Group URL
