@@ -20,8 +20,8 @@
     - CI — Continuous Integration
 
     - CD — Continuous Delivery / Continuous Deployment
-These practices automate the entire flow from writing code → building → testing → deploying, making development faster, safer, and more reliable.
-
+- These practices automate the entire flow from writing code → building → testing → deploying, making development faster, safer, and more reliable.\
+- A typical CD pipeline is a sequence of automated “quality gates,” where each gate must be passed before reaching the next one.
 ![Alt text](./images/CICD-pipeline.png)
 ----
 ## 🔧 3. Continuous Integration (CI)
@@ -83,3 +83,26 @@ Every push triggers an automated process:
 - Reliable pipelines
 
 - Robust monitoring & alerting
+----
+## 🛡️ 6. Safe Deployment Strategies
+### 🔵 Blue–Green Deployment
+- Two identical environments:
+    - Blue (current) and Green (new).
+
+    - Deploy to Green → verify → switch traffic to Green.
+
+- Pros: fast rollback, minimal downtime
+- Cons: double infrastructure cost
+
+### 🟡 Canary Deployment
+- Deploy to a small percentage of users (1–5%) → monitor → gradually increase.
+
+- Pros: limits impact, real-world validation
+- Cons: requires advanced monitoring
+
+### 🟣 Feature Flags (Toggles)
+- Code is deployed with features disabled.
+- Features can be turned on/off at runtime.
+
+- Pros: safe release, instant rollback, A/B testing
+- Cons: can create technical debt
