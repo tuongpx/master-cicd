@@ -312,17 +312,19 @@ In the left sidebar, navigate to:
 `Admin Area → Overview → Users`
 Click `New User`.
 ![Alt text](./images/new-user.png)
-Fill in:
+Fill in:\
     `
-    - Name
-    - Username
-    - Email
+    - Name\
+    - Username\
+    - Email\
     - Password
     `
 Click Create user.
 ![Alt text](./images/new-user-info.png)
 Gitlab server will sent an email to change password for first time login.\
-Adjust user permissions
-    - Regular
+Adjust user permissions\
+    `
+    - Regular\
     - Administrator
+    `
 ##### Manage Group
