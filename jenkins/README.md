@@ -31,6 +31,7 @@
         - Run unit, integration, and E2E tests
         - Perform security scans (SAST, DAST, dependency checks)
 ----
+
 ## 🏗️ Jenkins Architecture Overview
 Jenkins uses a Master/Agent (Controller/Worker) architecture to distribute and scale workloads effectively
 
@@ -50,6 +51,7 @@ The Master is the central brain of Jenkins and is responsible for:
 All user interactions happen through the Jenkins Master.
 
 ----
+
 ### ⚙️ Jenkins Agent (Worker Node)
 Agents are machines that perform the actual work requested by the Master.
 Each agent can run:
@@ -73,6 +75,7 @@ Jenkins supports multiple agents running in parallel, enabling scalable and effi
 Agents allow Jenkins to distribute workloads across different environments and isolate job execution.
 
 ----
+
 ## 🔄 How the Jenkins Workflow Operates
 
    [ Developer ]
