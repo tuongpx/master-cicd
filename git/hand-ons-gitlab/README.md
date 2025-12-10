@@ -1,4 +1,4 @@
-### 🧪 9. Hands-on Lab: Create and Resolve a Git Conflict
+### 🧪 Hands-on Lab: Create and Resolve a Git Conflict
 Follow this lab to practice generating and fixing merge conflicts.
 #### 🔹 1. Initialize a test repository
 ```bash
@@ -67,7 +67,7 @@ git commit -m "Resolve conflict between Branch A and Branch B"
 Conflict resolved!
 
 ----
-## 🛠️ 10.Hands-on lab: Installing GitLab CE and Gitlab Runner.
+## 🛠️ Hands-on lab: Installing GitLab CE and Gitlab Runner.
 This guide explains how to install GitLab CE and GitLab Runner on a single Rocky Linux 9 server.
 It is optimized for a LAB environment with the following specs:
     - 4 vCPU
