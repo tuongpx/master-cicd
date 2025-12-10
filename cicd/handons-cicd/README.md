@@ -44,7 +44,7 @@ Store Docker Hub credentials as environment variables for use in the pipeline.
 - Go to Settings → CI/CD.
 - Expand the Variables section.
 - Click Add variable and create the following two variables:
-### Variable 1: DOCKER_USERNAME
+#### Variable 1: DOCKER_USERNAME
 
 - Key: DOCKER_USERNAME
 - Value: Your Docker Hub username (e.g., username)
@@ -52,7 +52,7 @@ Store Docker Hub credentials as environment variables for use in the pipeline.
 - Protected: Optional
 - Masked: Optional
 
-### Variable 2: DOCKER_PASSWORD
+#### Variable 2: DOCKER_PASSWORD
 
 - Key: DOCKER_PASSWORD
 - Value: The personal access token created from Docker Hub
