@@ -89,7 +89,7 @@ Agents allow Jenkins to distribute workloads across different environments and i
          |
          v
 [ Artifact Registry / Production Server ]
-----
+
 This structure gives Jenkins:
 
 - Scalability → run many builds in parallel
