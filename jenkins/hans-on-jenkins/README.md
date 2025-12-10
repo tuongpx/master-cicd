@@ -227,5 +227,14 @@ Save the generated token.
 #### Add Credential in Jenkins
 Navigate to:
 `Manage Jenkins → Credentials → Global → Add Credentials`
-![Alt text](./images/jenkins-credential.png)
+Kind: GitLab API token
+API Token: <PAT>
+ID: gitlab-token
+![Alt text](./images/jenkins-credential-2.png)
 
+#### Configure Webhook in GitLab
+Go to your GitLab project:
+- Settings → Webhooks
+![Alt text](./images/gitlab-webhook.png)
+- Test connection
+![Alt text](./images/webhook-connection-test.png)
