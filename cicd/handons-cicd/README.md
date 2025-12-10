@@ -14,4 +14,7 @@ Create a new project to hold your source code and CI/CD pipeline configuration.
 ![Alt text](./images/create-project-1.png)
 - Select `Create blank project`
 ![Alt text](./images/create-project-2.png)
+- Enter the project information and click `Create project`
+![Alt text](./images/create-project-3.png)
+
 
