@@ -74,8 +74,6 @@ Jenkins supports multiple agents running in parallel, enabling scalable and effi
 
 Agents allow Jenkins to distribute workloads across different environments and isolate job execution.
 
-----
-
 ## 🔄 How the Jenkins Workflow Operates
 
    [ Developer ]
