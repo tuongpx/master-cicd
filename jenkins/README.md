@@ -48,6 +48,7 @@ The Master is the central brain of Jenkins and is responsible for:
 - Providing the Jenkins user interface (UI) and API
 
 All user interactions happen through the Jenkins Master.
+
 ----
 ### ⚙️ Jenkins Agent (Worker Node)
 Agents are machines that perform the actual work requested by the Master.
@@ -70,6 +71,7 @@ Jenkins supports multiple agents running in parallel, enabling scalable and effi
 - Deployments
 
 Agents allow Jenkins to distribute workloads across different environments and isolate job execution.
+
 ----
 ## 🔄 How the Jenkins Workflow Operates
 
