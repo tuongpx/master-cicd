@@ -19,7 +19,7 @@ In this lab, we will demonstrate two practical installation methods:
 
 These two approaches will help you understand both containerized and non-containerized Jenkins setups, giving you flexibility to choose the best deployment model for your DevOps workflow.
 
-### 1. Deploy Jenkins using Docker Compose
+###  Deploy Jenkins using Docker Compose
 #### 
 Project folder structure
 ```bash
@@ -134,11 +134,93 @@ USER jenkins
 ```
 ----
 
-- Run this command `docker compose up -d` to setting up jenkins.
-- After Jenkins start, access to web gui: `http://jenkins.defenselab.info:8080`
-- Take password for the first time login
+- Run this command `docker compose up -d` to start jenkins service.
+- After Jenkins start, access to Jenkins web interface: `http://jenkins.defenselab.info:8080`
+- Get the password for your first login
 ```bash
 docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 ----
-### 2. Install Jenkins directly on a virtual machine
+###  Install Jenkins directly on a virtual machine
+In this lab, I'm using Rocky Linux 9 as virtual machine to install Jenkins. This method is suitable for teams that prefer a traditional server-based setup without containers.
+- ✅ Update System Packages
+```bash
+sudo dnf update -y
+```
+- ✅ Install Java (Required by Jenkins)
+  - Jenkins requires Java 17 on Rocky Linux 9.
+```bash
+sudo dnf install -y java-17-openjdk java-17-openjdk-devel
+```
+  - Verify Java version:
+```bash
+java -version
+```
+- ✅ Add Jenkins Repository
+```bash
+sudo dnf install -y wget
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+```
+- ✅ Install Jenkins
+```bash
+sudo dnf install -y jenkins
+```
+- ✅ Start and Enable Jenkins Service
+```bash
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+```
+  - Check service status:
+```bash
+sudo systemctl status jenkins
+```
+- ✅ Open Firewall Ports
+```bash
+sudo firewall-cmd --permanent --add-port=8080/tcp
+sudo firewall-cmd --reload
+```
+- ✅ Access Jenkins Web Interface
+  - Open a browser:
+```bash
+http://jenkins.defenselab.info:8080
+```
+- 🎉 Success! we've completed jenkins install with 2 method Docker Compose and Virtual machine.
+
+###  Manage Jenkins
+After logging in, you will see the main Jenkins interface
+✔ Dashboard
+- Displays your jobs and pipelines.
+
+✔ Manage Jenkins
+- Central location for system configuration, plugins, credentials, security, and node management.
+
+✔ People
+- User management section where you can view and manage Jenkins accounts.
+
+✔ Credentials
+- A secure storage area for passwords, tokens, SSH keys, and other sensitive information used in pipelines.
+
+### 🔌 Install Recommended Plugins
+There are some recommended Plugins need to install
+- Blue Ocean 
+
+- Docker Pipeline
+
+- Kubernetes CLI
+
+- GitLab Plugin
+![Alt text](./images/pipeline-test.png)
+#### 🔗 Connect Jenkins ↔ GitLab via Webhook
+- Create Personal Access Token (PAT) in GitLab
+`GitLab → Preferences → Access Tokens`
+![Alt text](./images/gitlab-PAT-2.png)
+- Required permissions:
+  - api
+  - read_repository
+
+Save the generated token.
+![Alt text](./images/gitlab-PAT-3.png)
+
