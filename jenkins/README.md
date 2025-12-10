@@ -75,7 +75,7 @@ Jenkins supports multiple agents running in parallel, enabling scalable and effi
 Agents allow Jenkins to distribute workloads across different environments and isolate job execution.
 
 ## 🔄 How the Jenkins Workflow Operates
-`
+```bash
    [ Developer ]
          |
          | Commit code (GitLab)
@@ -89,7 +89,7 @@ Agents allow Jenkins to distribute workloads across different environments and i
          |
          v
 [ Artifact Registry / Production Server ]
-`
+```
 This structure gives Jenkins:
 
 - Scalability → run many builds in parallel
