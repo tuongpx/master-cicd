@@ -212,7 +212,7 @@ There are some recommended Plugins need to install
 - Kubernetes CLI
 
 - GitLab Plugin
-![Alt text](./images/pipeline-test.png)
+![Alt text](./images/manage-jenkins.png)
 #### 🔗 Connect Jenkins ↔ GitLab via Webhook
 - Create Personal Access Token (PAT) in GitLab
 `GitLab → Preferences → Access Tokens`
@@ -223,4 +223,9 @@ There are some recommended Plugins need to install
 
 Save the generated token.
 ![Alt text](./images/gitlab-PAT-3.png)
+
+#### Add Credential in Jenkins
+Navigate to:
+`Manage Jenkins → Credentials → Global → Add Credentials`
+![Alt text](./images/jenkins-credential.png)
 
