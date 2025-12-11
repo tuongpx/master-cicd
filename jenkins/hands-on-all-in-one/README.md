@@ -82,6 +82,77 @@ helmchart/
     │   └── ingress.yaml
     └── values.yaml
 ```
+- File `helmchart/corejs/values.yaml`
+
+```bash
+namespace: corejs
+
+frontend:
+  image:
+    repository: registry.defenselab.info/defenselab/corejs/corejs-frontend
+    tag: "latest"
+  replicaCount: 2
+  service:
+    port: 80
+
+backend:
+  image:
+    repository: registry.defenselab.info/defenselab/corejs/corejs-backend
+    tag: "latest"
+  replicaCount: 2
+  service:
+    port: 80
+
+ingress:
+  enabled: true
+  host: corejs.defenselab.info
+```
+
+- File `helmchart/corejs/Chart.yaml`
+
+```bash
+apiVersion: v2
+name: corejs
+description: Helm chart to deploy frontend + backend for corejs project
+type: application
+version: 1.0.0
+appVersion: "1.0"
+```
+- File `hemlchart/corejs/templates/ingress.yaml`
+
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: corejs
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: corejs.defenselab.info
+    http:
+      paths:
+      # Backend: /api/**
+      - path: /api/
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: corejs-backend
+            port:
+              number: 80
+
+      # Frontend: còn lại
+      - path: /app/
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: corejs-frontend
+            port:
+              number: 80
+```
+
 
 - Jenkinsfile as follows:
 
