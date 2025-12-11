@@ -7,6 +7,18 @@
 - Configure Trigger
 ![Alt text](./images/jenkins-trigger.png)
 - Configure Pipeline
+You can either:
+
+Write your pipeline directly in the Pipeline script section in Jenkins, or
+Select Pipeline script from SCM to load it from your Git repository
+(In this example, we’ll use Pipeline script from SCM).
+Choose:
+
+SCM: Git
+Repository URL: http://gitlab.defenselab.info/defenselab/django.git
+Credentials: Select the created GitLab token
+Branches to build: e.g., master
+Script Path: Path to your Jenkinsfile (e.g., root directory)
 ![Alt text](./images/jenkins-pipeline.png)
 - Create Jenkinsfile and Push to GitLab
 ```bash
