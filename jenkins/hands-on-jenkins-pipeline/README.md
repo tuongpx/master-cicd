@@ -3,6 +3,7 @@
 - New Item → Enter name → Select “Pipeline” → OK
     - Item name: Django
     - Item type: Pipeline
+
 ![Alt text](./images/jenkins-create-item.png)
 - Configure Trigger
     - Build when a change is pushed to GitLab. GitLab webhook URL: http://jenkins.defenselab.info:8080/project/Django
@@ -23,6 +24,7 @@
     - Credentials: Select the created GitLab token
     - Branches to build: e.g., master
     - Script Path: Path to your Jenkinsfile (e.g., root directory)
+
 ![Alt text](./images/jenkins-pipeline.png)
 - Create Jenkinsfile and Push to GitLab
 ```bash
