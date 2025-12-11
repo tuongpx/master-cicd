@@ -233,7 +233,7 @@ pipeline {
 - This is the key element that transforms CI/CD into Continuous Delivery.
 
 ### Verify
-- cnDue to the trigger configuration, any change in GitLab will automatically notify Jenkins CI, and all stages will become visible in the pipeline.
+- Due to the trigger configuration, any change in GitLab will automatically notify Jenkins CI, and all stages will become visible in the pipeline.
 ![Alt text](./images/CTO-confirm-stage.png)
 - You can check your build result as below
 ![Alt text](./images/CTO-approve.png)
