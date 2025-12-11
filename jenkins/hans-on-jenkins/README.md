@@ -248,9 +248,12 @@ Go to your GitLab project:
   - Jenkins’ own user database
   - Role-based Strategy
 ![Alt text](./images/jenkins-security.png)
+
 - You can create user in jenkins
 ![Alt text](./images/jenkins-user.png)
+
 - Grant permission
 ![Alt text](./images/jenkins-manage-role.png)
+
 - Assign role
 ![Alt text](./images/jenkins-assign-role.png)
