@@ -8,7 +8,7 @@
     - Build when a change is pushed to GitLab. GitLab webhook URL: http://jenkins.defenselab.info:8080/project/Django
         - Enabled GitLab triggers:
             - Push Events
-            - Opened Merge Request Events
+            - Opened Merge Request Events\
 ![Alt text](./images/jenkins-trigger.png)
 - Configure Pipeline
 
