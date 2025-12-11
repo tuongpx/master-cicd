@@ -238,3 +238,19 @@ Go to your GitLab project:
 ![Alt text](./images/gitlab-webhook.png)
 - Test connection
 ![Alt text](./images/webhook-connection-test.png)
+
+#### 🛂 RBAC: Create CTO User & Assign Permissions
+##### 1️⃣ Enable RBAC
+- In Jenkins:
+`Manage Jenkins → Security`
+- Enable:
+  - Security
+  - Jenkins’ own user database
+  - Role-based Strategy
+![Alt text](./images/jenkins-security.png)
+- You can create user in jenkins
+![Alt text](./images/jenkins-user.png)
+- Grant permission
+![Alt text](./images/jenkins-manage-role.png)
+- Assign role
+![Alt text](./images/jenkins-assign-role.png)
