@@ -43,7 +43,7 @@ The Jenkinsfile implements:
 
 - Kubernetes deployment
 
-## 1. Create Pipeline
+### Create Pipeline
 - New Item → Enter name → Select “Pipeline” → OK
     - Item name: corejs
     - Item type: Pipeline
@@ -70,7 +70,7 @@ The Jenkinsfile implements:
     - Script Path: Path to your Jenkinsfile (e.g., root directory)
 
 ![Alt text](./images/jenkins-pipeline-01.png)
-- Create Jenkinsfile and Push to GitLab
+### Create Jenkinsfile and Push to GitLab
 ```bash
 vim Jenkinsfile
 ```
