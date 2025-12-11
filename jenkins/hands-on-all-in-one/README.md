@@ -65,8 +65,23 @@ Access to Gitlab and clone project `Corejs`
 ```bash
 git clone http://gitlab.defenselab.info/defenselab/corejs.git
 ```
-In this project, I have Jenkinsfile to simply 
-````bash
+- I will use Helm to deploy the application to the Kubernetes cluster.
+The Helm chart directory structure will be organized as follows:
+```bash
+helmchart/
+└── corejs
+    ├── Chart.yaml
+    ├── templates
+    │   ├── backend-deployment.yaml
+    │   ├── backend-service.yaml
+    │   ├── frontend-deployment.yaml
+    │   ├── frontend-service.yaml
+    │   └── ingress.yaml
+    └── values.yaml
+```
+
+- Jenkinsfile as follows:
+
 ```bash
 vim Jenkinsfile
 ```
