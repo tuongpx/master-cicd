@@ -5,6 +5,10 @@
     - Item type: Pipeline
 ![Alt text](./images/jenkins-create-item.png)
 - Configure Trigger
+    - Build when a change is pushed to GitLab. GitLab webhook URL: http://jenkins.defenselab.info:8080/project/Django
+        - Enabled GitLab triggers:
+            - Push Events
+            - Opened Merge Request Events
 ![Alt text](./images/jenkins-trigger.png)
 - Configure Pipeline
 
@@ -105,4 +109,4 @@ pipeline {
 ![Alt text](./images/jenkins-pipeline-build.png)
 - You can check your build result as below
 ![Alt text](./images/jenkins-console-output.png)
-- 🎉 Success! If all jobs pass (displayed in green), you have successfully set up the CI/CD pipeline.
+- 🎉 Success! If all jobs pass (displayed in green), you have successfully set up the CI/CD pipeline. 
