@@ -63,7 +63,41 @@
 External access handled via HAProxy (192.168.80.22)
 ```
 
-### Gitlab
+### Prepare environment
+
+#### Setup Gitlab Webhook
+- Setup webhook to send trigger to jenkins when has any change from Gitlab
+![Alt text](./images/corejs-webhook.png)
+
+#### Create Pipeline
+- New Item → Enter name → Select “Pipeline” → OK
+    - Item name: corejs
+    - Item type: Pipeline
+
+- Configure Trigger
+    - Build when a change is pushed to GitLab. GitLab webhook URL:  http://jenkins.defenselab.info:8080/project/CoreJS
+        - Enabled GitLab triggers:
+            - Push Events
+            - Opened Merge Request Events
+            - 
+
+![Alt text](./images/jenkins-trigger-01.png)
+- Configure Pipeline
+
+    - Write your pipeline directly in the Pipeline script section in Jenkins, or
+    - Select Pipeline script from SCM to load it from your Git repository\
+    (In this example, we’ll use Pipeline script from SCM).
+- Choose:
+
+    - SCM: Git
+    - Repository URL: http://gitlab.defenselab.info/defenselab/corejs.git
+    - Credentials: Select the credential that was created in the previous lab.
+    - Branches to build: e.g., master
+    - Script Path: Path to your Jenkinsfile (e.g., root directory)
+
+![Alt text](./images/jenkins-pipeline-01.png)
+
+### Prepare source code and manifest file
 Access to Gitlab and clone project `Corejs`
 ```bash
 git clone http://gitlab.defenselab.info/defenselab/corejs.git
@@ -392,35 +426,6 @@ pipeline {
     }
 }
 ```
-- Setup webhook to send trigger to jenkins when has any change from Gitlab
-![Alt text](./images/corejs-webhook.png)
 
-### Create Pipeline
-- New Item → Enter name → Select “Pipeline” → OK
-    - Item name: corejs
-    - Item type: Pipeline
-
-- Configure Trigger
-    - Build when a change is pushed to GitLab. GitLab webhook URL:  http://jenkins.defenselab.info:8080/project/CoreJS
-        - Enabled GitLab triggers:
-            - Push Events
-            - Opened Merge Request Events
-            - 
-
-![Alt text](./images/jenkins-trigger-01.png)
-- Configure Pipeline
-
-    - Write your pipeline directly in the Pipeline script section in Jenkins, or
-    - Select Pipeline script from SCM to load it from your Git repository\
-    (In this example, we’ll use Pipeline script from SCM).
-- Choose:
-
-    - SCM: Git
-    - Repository URL: http://gitlab.defenselab.info/defenselab/corejs.git
-    - Credentials: Select the credential that was created in the previous lab.
-    - Branches to build: e.g., master
-    - Script Path: Path to your Jenkinsfile (e.g., root directory)
-
-![Alt text](./images/jenkins-pipeline-01.png)
 
 
