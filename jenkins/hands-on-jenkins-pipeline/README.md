@@ -101,3 +101,8 @@ pipeline {
     }
 }
 ```
+- Now, you can run pipeline whenever you push code to your repository or you can run manually by click to Build Now button in your pipeline
+![Alt text](./images/jenkins-pipeline-build.png)
+- You can check your build result as below
+![Alt text](./images/jenkins-console-output.png)
+- 🎉 Success! If all jobs pass (displayed in green), you have successfully set up the CI/CD pipeline.
