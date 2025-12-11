@@ -152,8 +152,89 @@ spec:
             port:
               number: 80
 ```
+- File `hemlchart/corejs/templates/backend-service.yaml`
 
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: corejs-backend
+spec:
+  selector:
+    app: corejs-backend
+  ports:
+    - protocol: TCP
+      port: {{ .Values.backend.service.port }}
+      targetPort: 80
+  type: ClusterIP
+  ```
+- File `hemlchart/corejs/templates/backend-deployment.yaml`
 
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: corejs-backend
+  labels:
+    app: corejs-backend
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: corejs-backend
+  template:
+    metadata:
+      labels:
+        app: corejs-backend
+    spec:
+      containers:
+        - name: corejs-backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          ports:
+            - containerPort: 80
+```
+
+- File `hemlchart/corejs/templates/frontend-service.yaml`
+
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: corejs-frontend
+spec:
+  type: NodePort
+  selector:
+    app: corejs-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+```
+
+- File `hemlchart/corejs/templates/frontend-deployment.yaml`
+
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: corejs-frontend
+  labels:
+    app: corejs-frontend
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels:
+      app: corejs-frontend
+  template:
+    metadata:
+      labels:
+        app: corejs-frontend
+    spec:
+      containers:
+        - name: corejs-frontend
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          ports:
+            - containerPort: 80
+```
 - Jenkinsfile as follows:
 
 ```bash
