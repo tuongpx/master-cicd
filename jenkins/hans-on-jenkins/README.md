@@ -253,6 +253,9 @@ Go to your GitLab project:
 ![Alt text](./images/jenkins-user.png)
 
 - Grant permission
+  - Under Matrix Authorization:
+    - Admin : Full permissions
+    - CTO: Read, Build, Job -> Discovery, Read, Build, Overall -> Read
 ![Alt text](./images/jenkins-manage-role.png)
 
 - Assign role\
