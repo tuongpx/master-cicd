@@ -444,4 +444,5 @@ git push origin master
 
 ![Alt text](./images/k8s-pod-check.png)
 
-
+- Access web interface app corejs
+![Alt text](./images/check-app-web-ui.png)
