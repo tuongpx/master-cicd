@@ -231,8 +231,24 @@ pipeline {
 - The Confirm from CTO stage pauses the pipeline until a user with the role CTO approves the deployment.
 
 - This is the key element that transforms CI/CD into Continuous Delivery.
-- Cause of trigger setting up, any change from Gitlab will send trigger to Jenkins CI, we can see the "Confirm from CTO" stage on pipeline
+
+### Verify
+- cnDue to the trigger configuration, any change in GitLab will automatically notify Jenkins CI, and all stages will become visible in the pipeline.
 ![Alt text](./images/CTO-confirm-stage.png)
 - You can check your build result as below
 ![Alt text](./images/CTO-approve.png)
 - 🎉 Success! If all jobs pass (displayed in green), you have successfully set up the CI/CD pipeline  with manual approve. 
+
+### ✅ Outcome of the Lab
+
+After completing this hands-on lab, you will understand how to:
+
+- Implement multi-stage CI/CD pipelines
+
+- Integrate Jenkins with Harbor Registry
+
+- Add manual approval gates
+
+- Deploy applications to Kubernetes (k8s)
+
+- Apply Continuous Delivery best practices in Jenkins
