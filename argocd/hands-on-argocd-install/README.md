@@ -13,4 +13,18 @@ kubectl get svc -n ingress-controller
 ```
 ![Alt text](./images/ingress-controller.png)
 
+✔ Everything is ready. Let's go !!!
+
+## ArgoCD Install
+### Create namespace and install argocd
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+### Verify argo component on cluster
+```bash
+kubectl get all -n argocd
+```
+![Alt text](./images/k8s-argocd.png)
+
 
