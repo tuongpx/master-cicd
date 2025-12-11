@@ -427,5 +427,21 @@ pipeline {
 }
 ```
 
+### Deployment to Kubernetes
+
+- Push manifest file to gitlab
+```bash
+cd corejs
+git add .
+git commit -m "Deployment corejs to k8s"
+git push origin master
+```
+- Lets see what happen in jenkins
+
+![Alt text](./images/jenkins-stage.png)
+
+- Lets check on kubernetes cluster
+
+![Alt text](./images/k8s-pod-check.png)
 
 
