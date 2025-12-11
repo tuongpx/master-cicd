@@ -32,7 +32,8 @@
 | ssh.gitlab.defenselab.info | 192.168.80.18 | Git over SSH                                        |
 
 ### Summary Diagram
-`
+
+```bash
 +------------------------+       +------------------------+
 |   Developer (Git Push) | --->  |  GitLab (192.168.80.18)| 
 +------------------------+       +------------------------+
@@ -60,7 +61,8 @@
       +-----------------------------------------------------------+
 
 External access handled via HAProxy (192.168.80.22)
-`
+```
+
 ### Gitlab
 Access to Gitlab and clone project `Corejs`
 ```bash
