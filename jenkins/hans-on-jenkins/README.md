@@ -255,5 +255,5 @@ Go to your GitLab project:
 - Grant permission
 ![Alt text](./images/jenkins-manage-role.png)
 
-- Assign role
+- Assign role\
 ![Alt text](./images/jenkins-assign-role.png)
