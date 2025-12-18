@@ -303,6 +303,101 @@ managedNodeGroups:
 eksctl create cluster -f tony-cluster-v1.yaml
 ```
 
+- Sau khi cluster tạo thành công, ta gõ lệnh sau để kiểm tra:
+```bash
+kubectl get node
+```
+
+- Ta sẽ thấy các node đã được tạo thành công
+```bash
+tuongpx@TuongPX-PC:~/1.devsecops/aws$ eksctl create cluster -f tuongpx-cluster-v1.yaml
+2025-12-19 00:14:22 [ℹ]  eksctl version 0.220.0
+2025-12-19 00:14:22 [ℹ]  using region ap-southeast-1
+2025-12-19 00:14:23 [ℹ]  setting availability zones to [ap-southeast-1c ap-southeast-1a ap-southeast-1b]
+2025-12-19 00:14:23 [ℹ]  subnets for ap-southeast-1c - public:192.168.0.0/19 private:192.168.96.0/19
+2025-12-19 00:14:23 [ℹ]  subnets for ap-southeast-1a - public:192.168.32.0/19 private:192.168.128.0/19
+2025-12-19 00:14:23 [ℹ]  subnets for ap-southeast-1b - public:192.168.64.0/19 private:192.168.160.0/19
+2025-12-19 00:14:23 [ℹ]  nodegroup "student-workers" will use "ami-032f7a3af8d91d3a4" [Ubuntu2404/1.32]
+2025-12-19 00:14:23 [ℹ]  using EC2 key pair "tuongpx-key"
+2025-12-19 00:14:23 [!]  Auto Mode will be enabled by default in an upcoming release of eksctl. This means managed node groups and managed networking add-ons will no longer                                                                           be created by default. To maintain current behavior, explicitly set 'autoModeConfig.enabled: false' in your cluster configuration. Learn more: https://eksctl.io/usage/auto-m                                                                          ode/
+2025-12-19 00:14:23 [ℹ]  using Kubernetes version 1.32
+2025-12-19 00:14:23 [ℹ]  creating EKS cluster "tuongpx-lab-cluster" in "ap-southeast-1" region with managed nodes
+2025-12-19 00:14:23 [ℹ]  1 nodegroup (student-workers) was included (based on the include/exclude rules)
+2025-12-19 00:14:23 [ℹ]  will create a CloudFormation stack for cluster itself and 1 managed nodegroup stack(s)
+2025-12-19 00:14:23 [ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=ap-southeast-1 --cluster=tuongpx-lab-cluster                                                                          '
+2025-12-19 00:14:23 [ℹ]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "tuongpx-lab-cluster" in "ap-southeast-1"
+2025-12-19 00:14:23 [ℹ]  CloudWatch logging will not be enabled for cluster "tuongpx-lab-cluster" in "ap-southeast-1"
+2025-12-19 00:14:23 [ℹ]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=ap-southeast-1 --cluste                                                                          r=tuongpx-lab-cluster'
+2025-12-19 00:14:23 [ℹ]
+2 sequential tasks: { create cluster control plane "tuongpx-lab-cluster",
+    2 sequential sub-tasks: {
+        5 sequential sub-tasks: {
+            1 task: { create addons },
+            wait for control plane to become ready,
+            associate IAM OIDC provider,
+            no tasks,
+            update VPC CNI to use IRSA if required,
+        },
+        create managed nodegroup "student-workers",
+    }
+}
+2025-12-19 00:14:23 [ℹ]  building cluster stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:14:24 [ℹ]  deploying stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:14:57 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:15:30 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:16:33 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:17:39 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:18:45 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:19:52 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:20:58 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:22:11 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:23:17 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-cluster"
+2025-12-19 00:23:20 [!]  recommended policies were found for "vpc-cni" addon, but since OIDC is disabled on the cluster, eksctl cannot configure the requested permissions; t                                                                          he recommended way to provide IAM permissions for "vpc-cni" addon is via pod identity associations; after addon creation is completed, add all recommended policies to the co                                                                          nfig file, under `addon.PodIdentityAssociations`, and run `eksctl update addon`
+2025-12-19 00:23:20 [ℹ]  creating addon: vpc-cni
+2025-12-19 00:23:20 [ℹ]  successfully created addon: vpc-cni
+2025-12-19 00:23:21 [ℹ]  creating addon: coredns
+2025-12-19 00:23:21 [ℹ]  successfully created addon: coredns
+2025-12-19 00:23:21 [ℹ]  creating addon: kube-proxy
+2025-12-19 00:23:22 [ℹ]  successfully created addon: kube-proxy
+2025-12-19 00:25:36 [ℹ]  addon "vpc-cni" active
+2025-12-19 00:25:37 [ℹ]  deploying stack "eksctl-tuongpx-lab-cluster-addon-vpc-cni"
+2025-12-19 00:25:37 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-addon-vpc-cni"
+2025-12-19 00:26:10 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-addon-vpc-cni"
+2025-12-19 00:26:10 [ℹ]  updating addon
+2025-12-19 00:26:21 [ℹ]  addon "vpc-cni" active
+2025-12-19 00:26:21 [ℹ]  building managed nodegroup stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:26:22 [ℹ]  deploying stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:26:22 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:26:55 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:27:33 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:28:47 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:30:53 [ℹ]  waiting for CloudFormation stack "eksctl-tuongpx-lab-cluster-nodegroup-student-workers"
+2025-12-19 00:30:53 [ℹ]  waiting for the control plane to become ready
+2025-12-19 00:30:54 [✔]  saved kubeconfig as "/home/tuongpx/.kube/config"
+2025-12-19 00:30:54 [ℹ]  no tasks
+2025-12-19 00:30:54 [✔]  all EKS cluster resources for "tuongpx-lab-cluster" have been created
+2025-12-19 00:30:54 [ℹ]  nodegroup "student-workers" has 2 node(s)
+2025-12-19 00:30:54 [ℹ]  node "ip-192-168-22-212.ap-southeast-1.compute.internal" is ready
+2025-12-19 00:30:54 [ℹ]  node "ip-192-168-80-41.ap-southeast-1.compute.internal" is ready
+2025-12-19 00:30:54 [ℹ]  waiting for at least 1 node(s) to become ready in "student-workers"
+2025-12-19 00:30:54 [ℹ]  nodegroup "student-workers" has 2 node(s)
+2025-12-19 00:30:54 [ℹ]  node "ip-192-168-22-212.ap-southeast-1.compute.internal" is ready
+2025-12-19 00:30:54 [ℹ]  node "ip-192-168-80-41.ap-southeast-1.compute.internal" is ready
+2025-12-19 00:30:54 [✔]  created 1 managed nodegroup(s) in cluster "tuongpx-lab-cluster"
+2025-12-19 00:30:55 [ℹ]  creating addon: metrics-server
+2025-12-19 00:30:56 [ℹ]  successfully created addon: metrics-server
+2025-12-19 00:30:57 [ℹ]  kubectl command should work with "/home/tuongpx/.kube/config", try 'kubectl get nodes'
+2025-12-19 00:30:57 [✔]  EKS cluster "tuongpx-lab-cluster" in "ap-southeast-1" region is ready
+tuongpx@TuongPX-PC:~/1.devsecops/aws$
+tuongpx@TuongPX-PC:~/1.devsecops/aws$
+tuongpx@TuongPX-PC:~/1.devsecops/aws$
+tuongpx@TuongPX-PC:~/1.devsecops/aws$ kubectl get node
+NAME                                                STATUS   ROLES    AGE     VERSION
+ip-192-168-22-212.ap-southeast-1.compute.internal   Ready    <none>   3m57s   v1.32.6
+ip-192-168-80-41.ap-southeast-1.compute.internal    Ready    <none>   3m57s   v1.32.6
+tuongpx@TuongPX-PC:~/1.devsecops/aws$
+```
+
 
 
 
