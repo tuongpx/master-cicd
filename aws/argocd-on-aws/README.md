@@ -14,3 +14,9 @@ kubectl create namespace argocd
 # 2. Cài đặt ArgoCD từ manifest chính hãng (Bản Stable)
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
+![Alt text](./images/argocd-apply.png)
+
+- Kiểm tra 
+```bash
+kubectl get pods -n argocd
+```
