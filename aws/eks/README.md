@@ -10,10 +10,12 @@
 ### 1. Tạo IAM
 - Bước 1: Tạo IAM để truy cập cli lẫn web console.
     - Sau khi tạo user vào phần search gõ IAM và click chọn IAM
+
 ![Alt text](./images/IAM.png)
 
 - Bước 2: Tạo user:
     - Tại IAM bạn click vào Users sau đó bấm Create user
+
 ![Alt text](./images/create-user.png)
 
 - Bước 3: Tại hộp thoại tạo user:
@@ -22,6 +24,7 @@
     - Phần Console password bạn chọn Custom password và gõ mật khẩu vào.
     - Lưu ý từ phiên bản 2025 về sau việc tạo AWS access key sẽ không tạo lúc tạo user mà sẽ tạo sau khi tạo user xong.
     - Sau đó bấm Next để qua bước Set permissions.
+
 ![Alt text](./images/create-user-2.png)
 
 - Bước 4: Tại đây ta click chọn Attach policy dirrectly và chọn Administrator
