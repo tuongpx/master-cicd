@@ -295,7 +295,7 @@ managedNodeGroups:
     # Node IAM Role
     # ACTION REQUIRED: Replace '130618649638' with YOUR AWS Account ID
     iam:
-      instanceRoleARN: "arn:aws:iam::130618649638:role/TonyTechLab_EKS_Worker"
+      instanceRoleARN: "arn:aws:iam::130618649638:role/defenselab_EKS_Worker"
 ```
 
 - Tại aws cli tiến hành chạy lệnh tạo cụm cluster
