@@ -60,3 +60,4 @@ Lý do sư phạm: Khi triển khai EKS, hệ thống sẽ tự động gọi đ
 ```bash
 ⚠️ CẢNH BÁO BẢO MẬT: Trong môi trường Production (Chạy thật), TUYỆT ĐỐI HẠN CHẾ dùng Attach policies directly với quyền AdministratorAccess cho nhân viên thường. Hãy luôn tuân thủ nguyên tắc “Least Privilege” (Đặc quyền tối thiểu – chỉ cấp vừa đủ quyền để làm việc).
 ```
+– Sau Đó bạn kéo xuống cuối trang và bấm Next
