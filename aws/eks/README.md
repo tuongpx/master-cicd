@@ -167,7 +167,6 @@ kubectl version --client (Xác nhận đã có kubectl)
 eksctl version (Xác nhận đã có eksctl)
 ```
 ![Alt text](./images/aws-sts-caller-identity.png)
-
 ![Alt text](./images/kubectl-eksctl.png)
 
 
