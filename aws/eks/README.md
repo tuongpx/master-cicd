@@ -397,7 +397,7 @@ ip-192-168-22-212.ap-southeast-1.compute.internal   Ready    <none>   3m57s   v1
 ip-192-168-80-41.ap-southeast-1.compute.internal    Ready    <none>   3m57s   v1.32.6
 tuongpx@TuongPX-PC:~/1.devsecops/aws$
 ```
-
+`⚠️ Cảnh báo thời gian: Sau khi gõ Enter, lệnh này sẽ chạy mất khoảng 15 – 20 phút. Màn hình sẽ thấy hiện các dòng log như: building cluster stack, creating VPC, creating nodegroup… Đừng tắt cửa sổ CMD, cứ để nó chạy và đi pha một tách cà phê.`
 
 
 
