@@ -169,6 +169,140 @@ eksctl version (Xác nhận đã có eksctl)
 ![Alt text](./images/aws-sts-caller-identity.png)
 ![Alt text](./images/kubectl-eksctl.png)
 
+## III. Cài đặt EKS
+
+### Bước 1: Cài đặt role EKS Cluster cho user tuongpx
+
+- IAM > Access management > Role > Click Create role
+![Alt text](./images/iam_create_role.png)
+
+- Trust entity type chojn AWS service , Use case chọn EKS- Cluster và bấm Next
+![Alt text](./images/select_trusted_entity.png)
+
+- Hộp thoại Add Permission để mặc định như bên dưới và bấm Next
+![Alt text](./images/add-permission.png)
+
+- Hộp Thoại Name, review, and create để đặt tên cho Role  và bấm Create role
+![Alt text](./images/name-review-create.png)
+
+- Role đã thành tạo thành công
+![Alt text](./images/eks-cluster-create-success.png)
+
+### Bước 2: TẠO ROLE THỨ 2 (CHO WORKER NODES)
+
+- Role này là giấy phép để các máy tính con (EC2) có quyền nghe lệnh từ Cluster.
+    - 1.Bấm nút màu cam Create role (ngay trên màn hình bạn đang đứng).
+
+    - 2.Trusted entity type: Chọn AWS service.
+
+- Service or use case: Lần này KHÔNG chọn EKS.
+![Alt text](./images/worker-node-role.png)
+
+👉 Chọn: EC2. (Chọn dòng đầu tiên: EC2). và bấm Next
+
+- Add permissions (Bước này quan trọng nhất):  Bạn gõ vào ô tìm kiếm và tick chọn đủ 3 cái này (Có thể tìm từng cái rồi tick, sau đó xóa ô tìm kiếm để tìm cái tiếp theo):
+    - AmazonEKSWorkerNodePolicy (Quyền làm công nhân EKS).
+    - AmazonEC2ContainerRegistryReadOnly (Quyền tải Docker Image về).
+    - AmazonEKS_CNI_Policy (Quyền kết nối mạng IP).
+![Alt text](./images/worker-node-permissions-policies-1.png)
+
+- Bấm Next.
+
+- Role name: Đặt là defenselab_EKS_Worker. Và bấm Create role
+![Alt text](./images/worker-node-permissions-policies-2.png)
+
+- Role đã được tạo xong
+![Alt text](./images/worker-node-permissions-policies-3.png)
+
+### Bước 3: Tạo token cho network
+
+- Trong EC2 > Network & Security > Key Pairs và bấm Create key pair.
+![Alt text](./images/ec2-key-pair-1.png)
+
+- Sau đó tiến hành đặt
+    - Name : tên của key nhớ tên này sẽ dùng trong phần script tạo sau này.
+    - Key pair tyle chọn RSA
+    - Private key file format : .pem
+    - Bấm Create key pair để tạo key.
+![Alt text](./images/ec2-key-pair-2.png)
+
+- Key đã được tạo thành công
+![Alt text](./images/key-pair-create-success.png)
+
+### Bước 4: Sau khi đã tạo xong Role + Key Pair ta tiến hành dùng eksctl để tạo cụm EKS:
+
+- Tạo file tuongpx-cluster-v1.yaml với nội dung:
+
+```bash
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: tuongpx-lab-cluster
+  region: ap-southeast-1
+  version: "1.32"
+
+# =======================================================
+# 1. NETWORKING
+# =======================================================
+vpc:
+  # Disable NAT Gateway to save costs (~$30/month).
+  # Nodes will use Public IPs for internet access.
+  nat:
+    gateway: Disable
+  
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: false
+
+# =======================================================
+# 2. IAM (CLUSTER ROLE)
+# =======================================================
+iam:
+  # ACTION REQUIRED: Replace '130618649638' with YOUR AWS Account ID
+  serviceRoleARN: "arn:aws:iam::130618649638:role/defenselab_EKS_Cluster"
+  withOIDC: true
+
+# =======================================================
+# 3. ADD-ONS
+# =======================================================
+addons:
+  - name: vpc-cni
+  - name: coredns
+  - name: kube-proxy
+  - name: metrics-server
+
+# =======================================================
+# 4. NODE GROUP (WORKER)
+# =======================================================
+managedNodeGroups:
+  - name: student-workers
+    instanceType: c7i-flex.large
+    amiFamily: Ubuntu2404
+    
+    # Scaling configuration
+    minSize: 1
+    maxSize: 2
+    desiredCapacity: 2
+    volumeSize: 30
+    
+    # SSH Access
+    # ACTION REQUIRED: Ensure key pair 'tuongpx-key' exists in EC2
+    ssh:
+      allow: true
+      publicKeyName: tuongpx-key
+
+    # Node IAM Role
+    # ACTION REQUIRED: Replace '130618649638' with YOUR AWS Account ID
+    iam:
+      instanceRoleARN: "arn:aws:iam::130618649638:role/TonyTechLab_EKS_Worker"
+```
+
+- Tại aws cli tiến hành chạy lệnh tạo cụm cluster
+```bash
+eksctl create cluster -f tony-cluster-v1.yaml
+```
+
 
 
 
