@@ -23,11 +23,10 @@ kubectl get pods -n argocd
 ![Alt text](./images/kubectl-get-pods-n-argocd.png)
 
 ## PHẦN 2: ĐĂNG NHẬP VÀO ARGOCD
-
-- ArgoCD mặc định không công khai ra Internet (để bảo mật). Chúng ta sẽ dùng kỹ thuật “đào hầm” (Port Forward) để truy cập từ máy tính local.
+ArgoCD mặc định không công khai ra Internet (để bảo mật). Chúng ta sẽ dùng kỹ thuật “đào hầm” (Port Forward) để truy cập từ máy tính local.
 
 ### Bước 1: Lấy mật khẩu Admin
-- ArgoCD tự động tạo mật khẩu ngẫu nhiên. Chạy các lệnh dưới đây để lấy mật khẩu:
+ArgoCD tự động tạo mật khẩu ngẫu nhiên. Chạy các lệnh dưới đây để lấy mật khẩu:
 
 - Windows/ Linux
 
