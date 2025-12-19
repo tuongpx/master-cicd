@@ -29,17 +29,34 @@ kubectl get pods -n argocd
 ### Bước 1: Lấy mật khẩu Admin
 - ArgoCD tự động tạo mật khẩu ngẫu nhiên. Chạy các lệnh dưới đây để lấy mật khẩu:
 
-    - Windows/ Linux
+- Windows/ Linux
+
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" > secret.txt
 certutil -decode secret.txt decoded.txt
 type decoded.txt
 ```
-    - Macbook
+- Macbook
+
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" > secret.txt
 base64 -D -i secret.txt -o decoded.txt
 cat decoded.txt
 ```
+![Alt text](./images/argocd-secret-password.png)
+
+- Vậy là ta đã lấy được password admin của ArgoCD
+
+### Bước 2: “Đào hầm” truy cập (Port Forwarding)
+- Giữ nguyên cửa sổ CMD này chạy lệnh sau (nó sẽ treo màn hình, đừng tắt):
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+- Giải thích: bước này để ta chạy trực tiếp ArgoCD trên localhost như bên dưới đã login thành công với user admin / password là pass vừa lấy được từ file decoded.txt
+![Alt text](./images/argocd-dashboard.png)
+
+- Như vậy ta đã triển khai xong argocd lên eks.
+
+
 
 
