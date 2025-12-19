@@ -30,7 +30,7 @@ Sau khi request, AWS mất khoảng vài giây để sinh ra cái CNAME ngẫu n
 
 ```bash
 aws acm describe-certificate \
-  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/b04f0956-f3bf-4ddc-af7f-04eac4b1be03 \
+  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/bdbf6bf9-61d1-47d0-a57b-ee76b4c17070 \
   --region ap-southeast-1 \
   --query "Certificate.DomainValidationOptions[0].ResourceRecord"
 ```
@@ -44,7 +44,6 @@ Kết quả trả về sẽ là một cục JSON như thế này:
     "Value": "_bb81a9234eef689f22e2eb11ef4b521c.jkddzztszm.acm-validations.aws."
 }
 ```
-
 👉 Nhiệm vụ: Copy cái Name và Value đó.
 
 ### BƯỚC 3: CẤU HÌNH TRÊN CLOUDFLARE (THỦ CÔNG)
@@ -68,7 +67,7 @@ Sau khi add bên Cloudflare xong, đợi 1-2 phút rồi chạy lệnh này đ�
 
 ```bash
 aws acm describe-certificate \
-  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/b04f0956-f3bf-4ddc-af7f-04eac4b1be03 \
+  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/bdbf6bf9-61d1-47d0-a57b-ee76b4c17070 \
   --region ap-southeast-1 \
   --query "Certificate.Status"
 ```
