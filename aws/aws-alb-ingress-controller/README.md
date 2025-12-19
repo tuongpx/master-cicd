@@ -23,3 +23,24 @@ Tại Cert Manager bạn sẽ lấy ARN để chuẩn bị cho phần lab bên d
 ```bash
 eksctl utils associate-iam-oidc-provider --cluster tuongpx-lab-cluster --region ap-southeast-1 --approve
 ```
+
+### Bước 2: Gắn Tag cho Subnet Public (BẮT BUỘC)
+
+1. Vào AWS Console -> VPC -> Subnets.
+2. Tìm 2 Subnet Public của Cluster. Ở đây 2 subnet của mình lần lượt là
+- eksctl-tuongpx-lab-cluster-cluster/SubnetPublicAPSOUTHEAST1A
+- eksctl-tuongpx-lab-cluster-cluster/SubnetPublicAPSOUTHEAST1B
+- eksctl-tuongpx-lab-cluster-cluster/SubnetPublicAPSOUTHEAST1C
+
+![Alt text](./images/vpc-subnets.png)
+
+3. Vào tab Tags, đảm bảo CẢ 3 Subnet đều có tag sau:
+    - Key: `kubernetes.io/role/elb`
+    - Value: `1`
+
+Bạn Click chọn  Subnet ID của subnet đó > Bấm Action > Manage tags
+![Alt text](./images/subnet-manage-tag-1.png)
+
+Sau đó bạn kiểm tra xem đã có tag `kubernetes.io/role/elb` với `Value: 1` chưa. Nếu chưa có thì bấm và Add New tag và add tag đó vào. Như ở bên dưới mình đã add tag rồi.
+![Alt text](./images/subnet-manage-tag-2.png)
+
