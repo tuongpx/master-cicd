@@ -39,8 +39,10 @@ eksctl utils associate-iam-oidc-provider --cluster tuongpx-lab-cluster --region 
     - Value: `1`
 
 Bạn Click chọn  Subnet ID của subnet đó > Bấm Action > Manage tags
+
 ![Alt text](./images/subnet-manage-tag-1.png)
 
 Sau đó bạn kiểm tra xem đã có tag `kubernetes.io/role/elb` với `Value: 1` chưa. Nếu chưa có thì bấm và Add New tag và add tag đó vào. Như ở bên dưới mình đã add tag rồi.
+
 ![Alt text](./images/subnet-manage-tag-2.png)
 
