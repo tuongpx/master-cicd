@@ -13,5 +13,13 @@ Region: ap-southeast-1
 
 ![Alt text](./images/aws-certificate-manager.png)
 
-Bạn xem thêm bài hướng dẫn về Cert Manager trong EKS [tại đây](https://github.com/tuongpx/master-cicd/tree/master/aws/eks).
+Bạn xem thêm bài hướng dẫn về Cert Manager trong EKS [tại đây](https://github.com/tuongpx/master-cicd/tree/master/aws/eks).\
 Tại Cert Manager bạn sẽ lấy ARN để chuẩn bị cho phần lab bên dưới.
+
+![Alt text](./images/ARN-certificate.png)
+
+### Bước 1: Kích hoạt OIDC (Cầu nối bảo mật)
+
+```bash
+eksctl utils associate-iam-oidc-provider --cluster tuongpx-lab-cluster --region ap-southeast-1 --approve
+```
