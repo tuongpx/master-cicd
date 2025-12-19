@@ -30,7 +30,7 @@ Sau khi request, AWS mất khoảng vài giây để sinh ra cái CNAME ngẫu n
 
 ```bash
 aws acm describe-certificate \
-  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/bdbf6bf9-61d1-47d0-a57b-ee76b4c17070 \
+  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/c23e55fa-a6b5-4356-909a-30297254c2cb \
   --region ap-southeast-1 \
   --query "Certificate.DomainValidationOptions[0].ResourceRecord"
 ```
@@ -67,11 +67,11 @@ Sau khi add bên Cloudflare xong, đợi 1-2 phút rồi chạy lệnh này đ�
 
 ```bash
 aws acm describe-certificate \
-  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/bdbf6bf9-61d1-47d0-a57b-ee76b4c17070 \
+  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/c23e55fa-a6b5-4356-909a-30297254c2cb \
   --region ap-southeast-1 \
   --query "Certificate.Status"
 ```
 ⏳ Nếu thấy hiện: "PENDING_VALIDATION" -> Đợi thêm chút nữa.
 
 ✅ Nếu thấy hiện: "ISSUED" -> THÀNH CÔNG!
-
+![Alt text](./images/cert-issued.png)
