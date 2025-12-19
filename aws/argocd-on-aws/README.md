@@ -20,3 +20,26 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 ```bash
 kubectl get pods -n argocd
 ```
+![Alt text](./images/kubectl-get-pods-n-argocd.png)
+
+## PHẦN 2: ĐĂNG NHẬP VÀO ARGOCD
+
+- ArgoCD mặc định không công khai ra Internet (để bảo mật). Chúng ta sẽ dùng kỹ thuật “đào hầm” (Port Forward) để truy cập từ máy tính local.
+
+### Bước 1: Lấy mật khẩu Admin
+- ArgoCD tự động tạo mật khẩu ngẫu nhiên. Chạy các lệnh dưới đây để lấy mật khẩu:
+
+    - Windows/ Linux
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" > secret.txt
+certutil -decode secret.txt decoded.txt
+type decoded.txt
+```
+    - Macbook
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" > secret.txt
+base64 -D -i secret.txt -o decoded.txt
+cat decoded.txt
+```
+
+
