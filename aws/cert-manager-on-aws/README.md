@@ -30,7 +30,7 @@ Sau khi request, AWS mất khoảng vài giây để sinh ra cái CNAME ngẫu n
 
 ```bash
 aws acm describe-certificate \
-  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/88245e2f-83bd-444b-ad00-214f06a4ef68 \
+  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/b04f0956-f3bf-4ddc-af7f-04eac4b1be03 \
   --region ap-southeast-1 \
   --query "Certificate.DomainValidationOptions[0].ResourceRecord"
 ```
@@ -68,7 +68,7 @@ Sau khi add bên Cloudflare xong, đợi 1-2 phút rồi chạy lệnh này đ�
 
 ```bash
 aws acm describe-certificate \
-  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/88245e2f-83bd-444b-ad00-214f06a4ef68 \
+  --certificate-arn arn:aws:acm:ap-southeast-1:130618649638:certificate/b04f0956-f3bf-4ddc-af7f-04eac4b1be03 \
   --region ap-southeast-1 \
   --query "Certificate.Status"
 ```
