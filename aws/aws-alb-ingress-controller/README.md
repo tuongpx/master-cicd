@@ -257,3 +257,24 @@ kubectl apply -f argocd-ingress.yaml
 ```bash
 kubectl delete pod -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller
 ```
+![Alt text](./images/kubectl-get-ingress-n-argocd.png)
+
+## GIAI ĐOẠN 5: NGHIỆM THU (VERIFICATION)
+
+Chờ khoảng 2-3 phút, chạy lệnh:
+
+```bash
+kubectl get ingress -n argocd
+```
+
+![Alt text](./images/verify-argocd-aws.png)
+
+### Cấu hình Cloudflare (Final Step)
+
+Để public App bằng domain, ta add CNAME trong Cloudflare như sau:
+
+  - Name: subdomain của bạn.
+  - Target: Chính là ADDRESS bạn lấy được từ câu lệnh kubectl get ingress.
+  - Sau đó nhấn Save và test lại.
+
+![Alt text](./images/cf-cname-argocd-aws.png)
