@@ -25,10 +25,12 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
   --set controller.service.targetPorts.https=http
 ```
 
+```bash
 Giải thích tham số (Tại sao đây là chuẩn AWS?):
 
-    - ...ssl-cert: Gắn chứng chỉ ACM trực tiếp vào NLB.
+    + ...ssl-cert: Gắn chứng chỉ ACM trực tiếp vào NLB.
 
-    - ...ssl-ports: Mở cổng 443 trên NLB.
+    + ...ssl-ports: Mở cổng 443 trên NLB.
 
-    - targetPorts.https=http: SSL Offloading. NLB giải mã xong sẽ gửi traffic HTTP (80) vào Nginx. Nginx không cần lo việc giải mã nữa (nhẹ hơn, nhanh hơn).
+    + targetPorts.https=http: SSL Offloading. NLB giải mã xong sẽ gửi traffic HTTP (80) vào Nginx. Nginx không cần lo việc giải mã nữa (nhẹ hơn, nhanh hơn).
+```
