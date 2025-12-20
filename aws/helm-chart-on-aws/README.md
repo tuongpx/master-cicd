@@ -3,8 +3,8 @@
 ## 🏗️ PHẦN 1: CÀI ĐẶT NGINX VỚI AWS ACM (NLB SSL TERMINATION)
 Đây là bước thay đổi quan trọng nhất. Chúng ta sẽ cấu hình để AWS NLB tự động gán chứng chỉ ACM vào cổng 443.
 
-Chuẩn bị: Copy cái ARN của chứng chỉ ACM *.tonytechlab.com mà bạn đã có.
-(Ví dụ: arn:aws:acm:ap-southeast-1:241688915712:certificate/70c58476-9a59-4bdc-b1df-cca71c88963a)
+`Chuẩn bị: Copy cái ARN của chứng chỉ ACM *.tonytechlab.com mà bạn đã có.
+(Ví dụ: arn:aws:acm:ap-southeast-1:241688915712:certificate/70c58476-9a59-4bdc-b1df-cca71c88963a)`
 
 Lệnh cài đặt (Helm):
 
