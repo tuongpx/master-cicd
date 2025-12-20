@@ -53,7 +53,7 @@ sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 
 Mặc định Docker không giới hạn dung lượng log container. Ta cần sửa file `daemon.json`:
 
-`
+```bash
 # 1. Mở file cấu hình
 sudo vimvim /etc/docker/daemon.json
 
@@ -68,4 +68,40 @@ sudo vimvim /etc/docker/daemon.json
   "exec-opts": ["native.cgroupdriver=systemd"],
   "live-restore": true
 }
-`
+```
+### 4.2. Khởi động Service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+# Phần 5: Bảo mật & Alias Tiện ích
+
+⛔ SECURITY WARNING:
+Không chạy lệnh sudo usermod -aG docker $USER trên server Production. Điều này tương đương với việc trao quyền Root không cần mật khẩu cho user đó.
+
+Thay vì add user vào group, ta tạo lệnh tắt (alias) để tự động thêm sudo khi gõ lệnh. An toàn và tiện lợi.
+```bash
+# Chạy lệnh này để ghi alias vào cuối file .bashrc
+echo "alias d='sudo docker'" >> ~/.bashrc
+echo "alias dc='sudo docker compose'" >> ~/.bashrc
+
+# Kích hoạt ngay lập tức
+source ~/.bashrc
+```
+
+💡 Tip Troubleshooting:
+Nếu gặp lỗi “Command not found” sau khi tạo alias, hãy kiểm tra file ~/.bashrc xem có bị lỗi dấu nháy (quote) do copy paste không. Hãy dùng lệnh nano ~/.bashrc để sửa lại.
+
+# Phần 6: Kiểm tra kết quả
+
+Sử dụng alias d và dc vừa tạo để kiểm tra phiên bản:
+
+```bash
+# Kiểm tra docker
+d ps
+
+# Kiểm tra compose
+dc version
+```
