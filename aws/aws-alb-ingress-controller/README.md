@@ -182,7 +182,7 @@ metadata:
     
     # 4. ACM Certificate
     # ACTION REQUIRED: Replace the ARN below with your actual Certificate ARN from AWS ACM.
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:241688915712:certificate/70c58476-9a59-4bdc-b1df-cca71c88963a
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:130618649638:certificate/c23e55fa-a6b5-4356-909a-30297254c2cb
 
     # 5. Listen Ports
     # Configures the Load Balancer to listen on both HTTP (80) and HTTPS (443).
@@ -223,4 +223,14 @@ spec:
                   number: 80
 ```
 
+```bash
+1. Tại sao dùng target-type: ip?
+Cũ (Instance mode): Load Balancer gửi gói tin đến cửa máy chủ (NodePort) -> tìm Pod -> kube-proxy chuyển tiếp. (Tốn thêm 1 bước nhảy, tăng độ trễ).
+Mới (IP mode): Load Balancer gửi gói tin thẳng vào Pod. (Nhanh hơn, hiệu năng cao hơn).
+2. Tại sao backend-protocol là HTTP?
+Đây là mô hình SSL Termination (Mã hóa đầu ngoài, giải mã đầu trong):
+
+Client -> ALB (HTTPS): An toàn trên Internet.
+ALB -> Pod (HTTP): Đi trong mạng nội bộ VPC. Giảm tải CPU cho Pod, tránh lỗi Login Loop của ArgoCD.
+```
 
