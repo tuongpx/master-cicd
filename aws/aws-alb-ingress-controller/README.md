@@ -144,12 +144,14 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller
 ```
+![Alt text](./images/helm-install-aws-alb.png)
 
 ### Bước 3. Kiểm tra xem nó sống chưa:
 
 ```bash
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
+![Alt text](./images/aws-alb-check.png)
 
 
 
