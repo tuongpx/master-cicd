@@ -243,3 +243,17 @@ ALB -> Pod (HTTP): Đi trong mạng nội bộ VPC. Giảm tải CPU cho Pod, tr
 ```
 Sau khi lưu xong ta sẽ thấy file `argocd-ingress.yaml`
 ![Alt text](./images/check-ingress-alb-yaml.png)
+
+### Bước 2: Apply – tại termianl đứng cho thư mục có chứa file argocd-ingress.yaml Chạy lệnh triển kyaml
+
+```bash
+kubectl apply -f argocd-ingress.yaml
+```
+
+### Bước 3: Restart Controller (Mẹo nhỏ để ăn ngay)
+
+💡 Đôi khi Controller cần “vỗ nhẹ” để nhận diện Ingress mới.
+
+```bash
+kubectl delete pod -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller
+```
