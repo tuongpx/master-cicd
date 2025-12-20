@@ -233,4 +233,11 @@ Mới (IP mode): Load Balancer gửi gói tin thẳng vào Pod. (Nhanh hơn, hi�
 Client -> ALB (HTTPS): An toàn trên Internet.
 ALB -> Pod (HTTP): Đi trong mạng nội bộ VPC. Giảm tải CPU cho Pod, tránh lỗi Login Loop của ArgoCD.
 ```
+```bash
+3. Điều kiện tiên quyết (Prerequisites)
+Để file này chạy được, học viên phải đảm bảo:
 
+Đã có AWS Load Balancer Controller chạy trong cụm.
+Đã có Certificate trong AWS ACM và copy đúng ARN.
+Đã chuyển ArgoCD sang chế độ Insecure (thêm cờ --insecure vào deployment).
+```
