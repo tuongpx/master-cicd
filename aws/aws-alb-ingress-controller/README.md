@@ -241,3 +241,5 @@ ALB -> Pod (HTTP): Đi trong mạng nội bộ VPC. Giảm tải CPU cho Pod, tr
 Đã có Certificate trong AWS ACM và copy đúng ARN.
 Đã chuyển ArgoCD sang chế độ Insecure (thêm cờ --insecure vào deployment).
 ```
+Sau khi lưu xong ta sẽ thấy file `argocd-ingress.yaml`
+![Alt text](./images/check-ingress-alb-yaml.png)
