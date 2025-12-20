@@ -105,3 +105,4 @@ d ps
 # Kiểm tra compose
 dc version
 ```
+![Alt text](./images/docker-verify.png)
