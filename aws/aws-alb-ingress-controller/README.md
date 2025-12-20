@@ -278,3 +278,7 @@ kubectl get ingress -n argocd
   - Sau đó nhấn Save và test lại.
 
 ![Alt text](./images/cf-cname-argocd-aws.png)
+
+Vào ArgoCD bằng subdomain `argocd-aws.defenselab.info` để kiểm tra:
+
+![Alt text](./images/argocd-aws-dashboashboard
