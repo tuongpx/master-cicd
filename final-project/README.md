@@ -26,7 +26,8 @@ A. Hạ tầng (Infrastructure Setup)
 - Tạo GitHub Repo (Public/Private) để chứa Config cho Production.
 
 B. Quy trình CI/CD (Pipeline Workflow)
-![Alt text](./images/Lab-CI-CD-scaled.png)
+
+![Alt text](./images/Lab-CI-CD-Final-scaled.png)
 
 Viết Jenkinsfile thực hiện luồng công việc sau:
 
@@ -54,6 +55,7 @@ C. Kịch bản DR (Disaster Recovery Test)
 ## Cấu hình Harbor Repository
 
 Tạo project trên Harbor
+
 ![Alt text](./images/harbor-project-create.png)
 
 ## Chuẩn bị Gitlab Repository
