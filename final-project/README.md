@@ -56,9 +56,201 @@ C. Kịch bản DR (Disaster Recovery Test)
 
 ## Chuẩn bị hạ tầng
 - Cụm k8s local
-- Cài đặt gitlab, jenkins, dns, npm (xem tại ([đây] (https://github.com/tuongpx/master-cicd/blob/master/docker/README.md)))
+- Cài đặt gitlab, jenkins, dns, npm 
+    - Tạo macvlan network cho server cài đặt gitlab, jenkins, dns và npm
+
+    - Tạo `docker-compose.yml`
+
+```bash
+secops@devops-lab:/opt/defenselab$ cat docker-compose.yml
+# ===================================================================================
+# ==        DOCKER-COMPOSE FOR DEVSECOPS LAB (ALL-IN-ONE – IPVLAN L2)              ==
+# ==        Domain : defenselab.info                                               ==
+# ==        Subnet : 192.168.80.0/24                                               ==
+# ==        IP Pool: 192.168.80.100 – 192.168.80.127                               ==
+# ===================================================================================
+
+version: "3.8"
+
+services:
+
+  # -------------------------------------------------------------------------------
+  # SERVICE 1: TECHNITIUM DNS
+  # -------------------------------------------------------------------------------
+  technitium-dns:
+    image: technitium/dns-server:latest
+    container_name: technitium-dns
+    hostname: dns.defenselab.info
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    ports:
+      - "5380:5380/tcp"     # DNS Web UI
+    volumes:
+      - ./technitium-config:/etc/dns
+    networks:
+      VLAN80:
+        ipv4_address: 192.168.80.16
 
 
+  # -------------------------------------------------------------------------------
+  # SERVICE 2: NGINX PROXY MANAGER (REVERSE PROXY + SSL)
+  # -------------------------------------------------------------------------------
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    hostname: npm.defenselab.info
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"             # Admin UI
+    volumes:
+      - ./npm/data:/data
+      - ./npm/letsencrypt:/etc/letsencrypt
+    dns:
+      - 192.168.80.16
+      - 1.1.1.1
+    networks:
+      VLAN80:
+        ipv4_address: 192.168.80.101
+
+
+  # -------------------------------------------------------------------------------
+  # SERVICE 3: GITLAB EE
+  # -------------------------------------------------------------------------------
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    container_name: gitlab
+    hostname: gitlab.defenselab.info
+    restart: unless-stopped
+    shm_size: "256m"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.defenselab.info'
+        gitlab_rails['initial_root_password'] = 'ChangeMe@2025'
+    volumes:
+      - ./gitlab/config:/etc/gitlab
+      - ./gitlab/logs:/var/log/gitlab
+      - ./gitlab/data:/var/opt/gitlab
+    ports:
+      - "22:22"             # SSH (direct, not via NPM)
+      - "5050:5050"         # Registry internal
+    dns:
+      - 192.168.80.16
+      - 1.1.1.1
+    networks:
+      VLAN80:
+        ipv4_address: 192.168.80.102
+
+
+  # -------------------------------------------------------------------------------
+  # SERVICE 4: GITLAB RUNNER
+  # -------------------------------------------------------------------------------
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    restart: unless-stopped
+    privileged: true
+    depends_on:
+      - gitlab
+    volumes:
+      - ./runner-config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock   # ⚠️ LAB ONLY
+    dns:
+      - 192.168.80.16
+      - 1.1.1.1
+    networks:
+      VLAN80:
+        ipv4_address: 192.168.80.103
+
+
+  # -------------------------------------------------------------------------------
+  # SERVICE 5: JENKINS (ALL-IN-ONE CONTROLLER)
+  # -------------------------------------------------------------------------------
+  jenkins:
+    build:
+      context: ./jenkins
+    container_name: jenkins
+    hostname: jenkins.defenselab.info
+    restart: unless-stopped
+    user: root
+    privileged: true           # ⚠️ LAB ONLY
+    volumes:
+      - ./jenkins/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /project/kube/.kube:/root/.kube              # optional
+    dns:
+      - 192.168.80.16
+      - 1.1.1.1
+    networks:
+      VLAN80:
+        ipv4_address: 192.168.80.104
+
+
+# -------------------------------------------------------------------------------
+# GLOBAL NETWORK CONFIGURATION
+# -------------------------------------------------------------------------------
+networks:
+  VLAN80:
+    external: true   # Pre-created Docker IPVLAN L2 network
+```
+
+    - Tạo `Dockerfile` cho Jenkins
+```bash
+# ------------------------------------------------------------------------------
+# Jenkins Controller Image with Docker CLI (LAB ONLY)
+# ------------------------------------------------------------------------------
+FROM jenkins/jenkins:lts-jdk17
+
+USER root
+
+# Install prerequisites
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add Docker GPG key
+RUN install -m 0755 -d /etc/apt/keyrings \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg \
+       -o /etc/apt/keyrings/docker.asc \
+    && chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add Docker repository
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+https://download.docker.com/linux/debian \
+$(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+    | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker CLI only (NOT Docker Engine)
+RUN apt-get update && apt-get install -y docker-ce-cli \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install kubectl and Helm
+RUN curl -fsSL "https://dl.k8s.io/release/$(curl -fsSL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+    -o /usr/local/bin/kubectl \
+ && chmod +x /usr/local/bin/kubectl
+
+ENV HELM_VERSION=v3.17.4
+RUN curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar -xz \
+    && mv linux-amd64/helm /usr/local/bin/helm \
+    && chmod +x /usr/local/bin/helm \
+    && helm plugin install https://github.com/chartmuseum/helm-push
+
+# Back to jenkins user
+USER jenkins
+
+# Final verification check
+RUN kubectl version --client && helm version
+```
+
+Chạy lệnh `dc up -d --build --force-recreate`
+
+- Cài đặt Harbor xem tại [đây] (https://github.com/tuongpx/master-cicd/blob/master/docker/README.md)
+- Cài đặt argoCD xem tại [đây] (https://github.com/tuongpx/master-cicd/tree/master/argocd/hands-on-argocd-install)
 
 ## Cấu hình Harbor Repository
 
