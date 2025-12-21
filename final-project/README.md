@@ -249,8 +249,8 @@ RUN kubectl version --client && helm version
 
 Chạy lệnh `dc up -d --build --force-recreate`
 
-- Cài đặt Harbor xem tại [đây] (https://github.com/tuongpx/master-cicd/blob/master/docker/README.md)
-- Cài đặt argoCD xem tại [đây] (https://github.com/tuongpx/master-cicd/tree/master/argocd/hands-on-argocd-install)
+- Cài đặt Harbor xem tại [đây](https://github.com/tuongpx/master-cicd/tree/master/docker)
+- Cài đặt argoCD xem tại [đây](https://github.com/tuongpx/master-cicd/tree/master/argocd/hands-on-argocd-install)
 
 ## Cấu hình Harbor Repository
 
