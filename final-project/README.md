@@ -1,7 +1,7 @@
 # 🚀 Lab Bài Tập Cuối Khóa
-XÂY DỰNG HỆ THỐNG HYBRID CLOUD DR & GITOPS
+MỤC TIÊU: XÂY DỰNG HỆ THỐNG HYBRID CLOUD DR & GITOPS
 
-1. TỔNG QUAN DỰ ÁN
+# 1. TỔNG QUAN DỰ ÁN
 Xây dựng một hệ thống triển khai ứng dụng (CI/CD) đảm bảo tính sẵn sàng cao (High Availability) và khả năng phục hồi sau thảm họa (Disaster Recovery).
 
 ## Thách thức chính:
@@ -9,7 +9,7 @@ Xây dựng một hệ thống triển khai ứng dụng (CI/CD) đảm bảo t�
 - Hệ thống dự phòng (DR Site) chạy tại văn phòng (On-Premise) để đề phòng trường hợp Cloud bị sập (Region Outage) hoặc đứt cáp quang biển.
 - Yêu cầu đặc biệt: Code nguồn phải được bảo mật nội bộ. Chỉ phiên bản Release mới được đẩy ra Public Cloud.
 
-2. YÊU CẦU KỸ THUẬT (REQUIREMENTS)
+# 2. YÊU CẦU KỸ THUẬT (REQUIREMENTS)
 
 A. Hạ tầng (Infrastructure Setup)
 
