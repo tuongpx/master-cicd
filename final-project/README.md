@@ -56,7 +56,7 @@ C. Kịch bản DR (Disaster Recovery Test)
 
 ## Chuẩn bị hạ tầng
 - Cụm k8s local
-- Cài đặt gitlab, jenkins, dns, npm (xem tại [đây] (https://github.com/tuongpx/master-cicd/blob/master/docker/README.md))
+- Cài đặt gitlab, jenkins, dns, npm (xem tại ([đây] (https://github.com/tuongpx/master-cicd/blob/master/docker/README.md)))
 
 
 
