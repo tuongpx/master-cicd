@@ -105,6 +105,8 @@ d ps
 # Kiểm tra compose
 dc version
 ```
+![Alt text](./images/docker-verify.png)
+
 # Phần 7: Lab cài đặt Harbor Registry
 
 ## Bước 1: Tải bộ cài 
@@ -134,4 +136,4 @@ Sau khi cấu hình xong xuôi, anh em chạy script cài đặt. Nhớ thêm 2 
 ```
 ✅ Kết quả: Khi màn hình hiện thông báo thành công, anh em dùng lệnh docker-compose ps sẽ thấy một loạt service trạng thái Up. Vậy là xong phần core!
 
-![Alt text](./images/docker-verify.png)
+![Alt text](./images/harbor-verify.png)
