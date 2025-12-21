@@ -134,6 +134,6 @@ Sau khi cấu hình xong xuôi, anh em chạy script cài đặt. Nhớ thêm 2 
 ```bash
 ./install.sh --with-chartmuseum --with-trivy
 ```
-✅ Kết quả: Khi màn hình hiện thông báo thành công, anh em dùng lệnh docker-compose ps sẽ thấy một loạt service trạng thái Up. Vậy là xong phần core!
+✅ Kết quả: Khi màn hình hiện thông báo thành công, anh em dùng lệnh `d ps -a` sẽ thấy một loạt service trạng thái Up. Vậy là xong phần core!
 
 ![Alt text](./images/harbor-verify.png)
