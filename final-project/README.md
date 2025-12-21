@@ -52,6 +52,14 @@ C. Kịch bản DR (Disaster Recovery Test)
 - Failover: Vào Cloudflare DNS, chuyển traffic trỏ về Tunnel (DR Site).
 - Kết quả: Web vẫn hoạt động bình thường (chạy từ máy Local).
 
+# 3. Thực hiện
+
+## Chuẩn bị hạ tầng
+- Cụm k8s local
+- Cài đặt gitlab, jenkins, dns, npm, harbor
+
+
+
 ## Cấu hình Harbor Repository
 
 Tạo project trên Harbor
@@ -59,6 +67,7 @@ Tạo project trên Harbor
 ![Alt text](./images/harbor-project-create.png)
 
 ## Chuẩn bị Gitlab Repository
+
 
 
 

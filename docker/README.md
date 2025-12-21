@@ -105,4 +105,33 @@ d ps
 # Kiểm tra compose
 dc version
 ```
+# Phần 7: Lab cài đặt Harbor Registry
+
+## Bước 1: Tải bộ cài 
+
+```bash
+wget https://github.com/goharbor/harbor/releases/download/v2.14.1/harbor-offline-installer-v2.14.1.tgz
+tar -xvf harbor-offline-installer-v2.14.1.tgz
+mv harbor /opt/harbor-cluster
+```
+## Bước 2: Tinh chỉnh cấu hình
+
+```bash
+cd harbor-cluster/
+cp harbor.yml.tmpl harbor.yml
+```
+Những dòng cần sửa (Quan trọng):
+- hostname: Đổi thành domain của anh em (VD: harbor.tonytechlab.com).
+- http port: Đổi thành 8088 (Tránh port 80 để không đánh nhau với Nginx Proxy Manager).
+- https: Tìm và thêm dấu # để comment (tắt) toàn bộ phần này. Chúng ta sẽ xử lý SSL ở tầng Proxy cho nhàn đầu.
+- harbor_admin_password: Đổi mật khẩu admin mặc định (đừng để 123456 nhé).
+
+## Bước 3: Triển khai (Deploy)
+Sau khi cấu hình xong xuôi, anh em chạy script cài đặt. Nhớ thêm 2 options bên dưới để Harbor cài thêm module quản lý Helm Chart và module quét bảo mật Trivy.
+
+```bash
+./install.sh --with-chartmuseum --with-trivy
+```
+✅ Kết quả: Khi màn hình hiện thông báo thành công, anh em dùng lệnh docker-compose ps sẽ thấy một loạt service trạng thái Up. Vậy là xong phần core!
+
 ![Alt text](./images/docker-verify.png)
