@@ -533,7 +533,7 @@ Kiểm tra file `values-prod.yaml` trên Github đã được update với versi
 
 3. Kiểm tra trạng thái các pod sau khi deploy
 
-![Alt text](./images/kubectl-get-pods.png)
+![Alt text](./images/kubectl-get-pods-onpremise.png)
 
 ## Cấu hình ArgoCD AWS
 
@@ -548,6 +548,10 @@ Kiểm tra file `values-prod.yaml` trên Github đã được update với versi
 2. Tạo Application
 
 ![Alt text](./images/argocd-aws-app.png)
+
+3. Kiểm tra trạng thái các pod sau khi deploy
+
+![Alt text](./images/kubectl-get-pods.png)
 
 ✅ Kết quả: Ứng dụng đã được deploy tự động lên cả hai môi trường thông qua GitOps workflow.
 
