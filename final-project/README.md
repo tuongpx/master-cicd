@@ -270,6 +270,7 @@ https://gitlab.defenselab.info/master-cicd/corejs.git
 
 ### 3. Chuẩn bị github repository
 Github chỉ dùng để lưu trữ helmchart của dự án.
+
 https://github.com/tuongpx/corejs-prod.git
 
 ## Thiết lập Jenkins Pipeline
