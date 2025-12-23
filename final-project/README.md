@@ -531,6 +531,10 @@ Kiểm tra file `values-prod.yaml` trên Github đã được update với versi
 
 ![Alt text](./images/argocd-app.png)
 
+3. Kiểm tra trạng thái các pod sau khi deploy
+
+![Alt text](./images/kubectl-get-pods.png)
+
 ## Cấu hình ArgoCD AWS
 
 1. Kết nối Gitlab Repository
@@ -578,6 +582,11 @@ Các bước thực hiện
 - Truy cập vào ArgoCD AWS
 - Chọn Application `corejs-prod`
 - Scale replica về 0
+
+Kiểm tra trạng thái trên ArgoCD AWS
+
+![Alt text](./images/replica-0.png)
+
 
 Kết quả trả về khi truy cập `corejs.defenselab.info`
 
