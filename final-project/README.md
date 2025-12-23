@@ -252,13 +252,368 @@ Chạy lệnh `dc up -d --build --force-recreate`
 - Cài đặt Harbor xem tại [đây](https://github.com/tuongpx/master-cicd/tree/master/docker)
 - Cài đặt argoCD xem tại [đây](https://github.com/tuongpx/master-cicd/tree/master/argocd/hands-on-argocd-install)
 
-## Cấu hình Harbor Repository
+## Chuẩn bị môi trường
 
-Tạo project trên Harbor
+### 1. Tạo Harbor Project
+Tại giao diện của Harbor
+- Click chọn `NEW PROJECT`
+- Điền thông tin của project
+
+![Alt text](./images/harbor-project-create-1.png)
+
+Trong bài lab này, tôi tạo `corejs` project
 
 ![Alt text](./images/harbor-project-create.png)
 
-## Chuẩn bị Gitlab Repository
+### 2. Chuẩn bị gitlab repository
+https://gitlab.defenselab.info/master-cicd/corejs.git
+
+### 3. Chuẩn bị github repository
+Github chỉ dùng để lưu trữ helmchart của dự án.
+https://github.com/tuongpx/corejs-prod.git
+
+## Thiết lập Jenkins Pipeline
+
+- Chuẩn bị Jenkinsfile thực hiện tự động hóa toàn bộ quy trình CI/CD từ build, push images đến update manifest cho produt lên Github.
+
+```bash
+pipeline {
+  agent any
+
+  environment {
+    APP_NAME   = "corejs"
+    DOCKER_TAG = "0.1.${env.BUILD_NUMBER}"
+
+    GIT_REPO = "https://gitlab.defenselab.info/master-cicd/corejs.git"
+    GIT_CRED = "gitlab-token"
+
+    GITOPS_REPO = "https://gitlab.defenselab.info/master-cicd/app-manifest.git"
+
+    HARBOR_DOMAIN  = "harbor.defenselab.info"
+    HARBOR_PROJECT = "corejs"
+    HARBOR_CRED    = "jenkins-harbor"
+
+    FRONTEND_IMAGE = "harbor.defenselab.info/corejs/corejs-frontend"
+    BACKEND_IMAGE  = "harbor.defenselab.info/corejs/corejs-backend"
+    HARBOR_IMAGE   = "harbor.defenselab.info/corejs/corejs-backend"
+
+    HELM_CHART_DIR = "helmchart"
+
+    AWS_REGION  = "ap-southeast-1"
+    ECR_ACCOUNT = "130618649638"
+    ECR_REPO    = "tuongpx-backend"
+    ECR_IMAGE   = "${ECR_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
+    AWS_CRED    = "jenkins-aws"
+
+    GITHUB_PROD_REPO = "https://github.com/tuongpx/corejs-prod.git"
+    GITHUB_CRED     = "github-token"
+  }
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        git branch: 'master',
+            credentialsId: GIT_CRED,
+            url: GIT_REPO
+      }
+    }
+
+    stage('Pre-flight Check') {
+      steps {
+        sh '''
+          docker --version
+          helm version
+          yq --version
+        '''
+      }
+    }
+
+    stage('Build & Push Docker Images') {
+      parallel {
+        stage('Frontend Image') {
+          steps {
+            script {
+              docker.withRegistry("https://${HARBOR_DOMAIN}", HARBOR_CRED) {
+                sh """
+                  docker build -t ${FRONTEND_IMAGE}:${DOCKER_TAG} frontend
+                  docker push ${FRONTEND_IMAGE}:${DOCKER_TAG}
+                """
+              }
+            }
+          }
+        }
+
+        stage('Backend Image') {
+          steps {
+            script {
+              docker.withRegistry("https://${HARBOR_DOMAIN}", HARBOR_CRED) {
+                sh """
+                  docker build -t ${BACKEND_IMAGE}:${DOCKER_TAG} -f CoreAPI/Dockerfile .
+                  docker push ${BACKEND_IMAGE}:${DOCKER_TAG}
+                """
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('Update Helm values.yaml') {
+      steps {
+        sh """
+          yq -i '
+            .frontend.image.repository = "${FRONTEND_IMAGE}" |
+            .frontend.image.tag = "${DOCKER_TAG}" |
+            .backend.image.repository = "${BACKEND_IMAGE}" |
+            .backend.image.tag = "${DOCKER_TAG}"
+          ' ${HELM_CHART_DIR}/values.yaml
+        """
+      }
+    }
+
+    stage('Package Helm Chart') {
+      steps {
+        sh """
+          helm lint ${HELM_CHART_DIR}
+          helm package ${HELM_CHART_DIR} --version ${DOCKER_TAG}
+        """
+      }
+    }
+
+    stage('Push Helm Chart to Harbor (OCI)') {
+      steps {
+        withCredentials([usernamePassword(
+          credentialsId: HARBOR_CRED,
+          usernameVariable: 'HARBOR_USER',
+          passwordVariable: 'HARBOR_PASS'
+        )]) {
+          sh '''
+            echo "$HARBOR_PASS" | helm registry login ${HARBOR_DOMAIN} \
+              --username "$HARBOR_USER" \
+              --password-stdin
+
+            helm push corejs-${DOCKER_TAG}.tgz \
+              oci://${HARBOR_DOMAIN}/${HARBOR_PROJECT}/
+          '''
+        }
+      }
+    }
+
+    stage('DEV: Update GitLab Manifest (Trigger ArgoCD)') {
+      steps {
+        withCredentials([usernamePassword(
+          credentialsId: GIT_CRED,
+          usernameVariable: 'GIT_USER',
+          passwordVariable: 'GIT_TOKEN'
+        )]) {
+          sh """
+            rm -rf app-manifest
+            git clone https://${GIT_USER}:${GIT_TOKEN}@${GITOPS_REPO.replace('https://','')} app-manifest
+            cd app-manifest
+
+            git config user.email "jenkins@defenselab.info"
+            git config user.name  "Jenkins Bot"
+
+            sed -i 's|tag:.*|tag: ${DOCKER_TAG}|' helm/values-local.yaml
+            git add helm/values-local.yaml
+            git commit -m "dev: update image tag ${DOCKER_TAG}" || true
+            git push origin main
+          """
+        }
+      }
+    }
+
+    stage("QUALITY GATE: QC Approval") {
+      steps {
+        input message: "QC APPROVAL REQUIRED for version ${DOCKER_TAG}",
+              ok: "Approve Release"
+      }
+    }
+
+    stage("PROMOTE: Push Image to AWS ECR") {
+      steps {
+        withCredentials([[ $class: 'AmazonWebServicesCredentialsBinding',
+                           credentialsId: AWS_CRED ]]) {
+          sh '''
+            aws ecr get-login-password --region ${AWS_REGION} \
+              | docker login --username AWS --password-stdin \
+                ${ECR_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
+
+            docker tag ${HARBOR_IMAGE}:${DOCKER_TAG} ${ECR_IMAGE}:${DOCKER_TAG}
+            docker push ${ECR_IMAGE}:${DOCKER_TAG}
+          '''
+        }
+      }
+    }
+
+    stage("PROMOTE: Update GitHub Prod Config (Trigger ArgoCD Cloud)") {
+      steps {
+        withCredentials([
+          usernamePassword(
+            credentialsId: GITHUB_CRED,
+            usernameVariable: 'GH_USER',
+            passwordVariable: 'GH_TOKEN'
+          ),
+          [$class: 'AmazonWebServicesCredentialsBinding',
+           credentialsId: AWS_CRED]
+        ]) {
+          sh """
+            rm -rf corejs-prod
+            git clone https://${GH_USER}:${GH_TOKEN}@github.com/tuongpx/corejs-prod.git
+            cd corejs-prod
+
+            git config user.email "jenkins@defenselab.info"
+            git config user.name  "Jenkins Bot"
+
+            AWS_ACCOUNT_ID=\$(aws sts get-caller-identity --query Account --output text)
+            ECR_URL="\${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
+
+            sed -i "s|repository: .*|repository: \${ECR_URL}|" helm/values-prod.yaml
+            sed -i "s|tag:.*|tag: ${DOCKER_TAG}|" helm/values-prod.yaml
+
+            git add helm/values-prod.yaml
+            git commit -m "release: promote ${DOCKER_TAG}"
+            git push origin master
+          """
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      echo "✅ RELEASE SUCCESS – Version ${DOCKER_TAG}"
+    }
+    failure {
+      echo "❌ PIPELINE FAILED – Please check console log"
+    }
+    always {
+      cleanWs()
+    }
+  }
+}
+```
+## Kiểm tra kết quả chạy pipeline
+
+Thực hiện build pipeline và theo dõi quá trình thực thi từng stage
+
+![Alt text](./images/pipeline.png)
+
+## Kiểm tra Harbor
+
+Image đã được push lên Harbor với tag version tương ứng build number trong Jenkins.
+
+![Alt text](./images/harbor-helm.png)
+
+## Kiểm tra ECR
+
+Image với tag version tương ứng với build number trong Jenkins đã được push lên.
+
+![Alt text](./images/ecr.png)
+
+## Kiểm tra Github manifest
+
+Kiểm tra file `values-prod.yaml` trên Github đã được update với version tương ứng.
+
+![Alt text](./images/github-manifest.png)
+
+## Cấu hình ArgoCD Onpremise
+
+1. Kết nối Gitlab Repository
+- Truy cập ArgoCD UI
+- Chọn `Setting` --> `Repositories`
+- Add repository : `corejs`
+![Alt text](./images/argocd-repo.png)
+
+2. Tạo Application
+
+![Alt text](./images/argocd-app.png)
+
+## Cấu hình ArgoCD AWS
+
+1. Kết nối Gitlab Repository
+- Truy cập ArgoCD AWS UI
+- Chọn `Setting` --> `Repositories`
+- Add repository : `corejs-prod`
+- Cấu hình authentication với GitHub Personal Access Token
+
+![Alt text](./images/argocd-aws-repo.png)
+
+2. Tạo Application
+
+![Alt text](./images/argocd-aws-app.png)
+
+✅ Kết quả: Ứng dụng đã được deploy tự động lên cả hai môi trường thông qua GitOps workflow.
+
+# 4. Public ứng dụng ra Internet
+
+## Cấu hình AWS ELB
+
+![Alt text](./images/kubectl-get-ingress.png)
+
+🔑 Lưu lại ELB address để cấu hình DNS trên Cloudflare
+
+## Cấu hình DNS Cloudflare
+
+Tạo bản ghi DNS với các thông số sau:
+- Type: `CNAME`
+- Name: `corejs`
+- Target: `ELB address`
+
+![Alt text](./images/CF-CNAME.png)
+
+Kiểm tra truy cập
+
+![Alt text](./images/corejs-ui.png)
+
+⚠️ Lưu ý: Chỉ public một site (AWS hoặc Local) tại một thời điểm để thực hiện kịch bản DR testing.
+
+# 4. Kịch bản Disaster Recovery
+
+## 1. Giả lập trường hợp hệ thống prod trên AWS bị gián đoạn
+
+Các bước thực hiện
+- Truy cập vào ArgoCD AWS
+- Chọn Application `corejs-prod`
+- Scale replica về 0
+
+Kết quả trả về khi truy cập `corejs.defenselab.info`
+
+![Alt text](./images/corejs-503.png)
+
+## 2. Kích hoạt DR Site (Cloudflare Tunnel Failover)
+
+Các bước thực hiện:
+- Truy cập vào `Zero Trust Dashboard` --> `Networks` --> `Connector`
+- Chọn Tunnel đang hoạt động `devops-lab` --> `Edit` --> `Published application routes` --> `Added a published application route`
+- Điền các thông tin cho route như sau:
+  - Subdomain: `corejs`
+  - Domain: `defenselab.info`
+  - Service: `HTTP`
+  - URL: `192.168.80.30:30080` (IP worker node và NodePort của Ingress Controller) 
+- Nhấn `Save`
+
+Truy cập lại `corejs.defenselab.info` để kiểm tra
+![Alt text](./images/corejs-ui.png)
+
+# 5. Xác nhận ứng dụng đã truy cập được bình thường
+✅ Kết quả:
+- Website corejs.defenselab.info hoạt động trở lại
+- Traffic được phục vụ từ K8S Local (DR Site)
+- RTO (Recovery Time Objective) đạt được trong vòng vài phút
+- Không mất dữ liệu (RPO = 0)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
