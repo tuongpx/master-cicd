@@ -595,6 +595,8 @@ Các bước thực hiện:
   - URL: `192.168.80.30:30080` (IP worker node và NodePort của Ingress Controller) 
 - Nhấn `Save`
 
+![Alt text](./images/pushlish-route.png)
+
 Truy cập lại `corejs.defenselab.info` để kiểm tra
 ![Alt text](./images/corejs-ui.png)
 
